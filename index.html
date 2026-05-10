@@ -1,103 +1,1927 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" dir="ltr" data-theme="dark" data-font="classic" data-herobg="gradient">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="theme-color" content="#c9a84c"/>
+<title>Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&family=Cairo:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500&family=Syne:wght@300;400;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+/* ── PRINT ── */
+@media print{nav,#splash,#back-top,#cookie-banner,#chat-widget,#edit-banner,
+  .btn-add,.card-controls,.edit-hint,.btn-add-skill,.nav-actions,.hamburger,
+  #pf-panels,footer,#testi,#dienste,#kontakt,#projekte,#ueber .avatar-wrap{display:none!important}
+  body{background:#fff!important;color:#111!important;font-size:12pt}
+  section{padding:1cm 0;max-width:100%;margin:0}
+  .reveal{opacity:1!important;transform:none!important}
+  .stat-num,.section-title em,.about-name em,.tl-year{color:#c9a84c!important}
+}
+/* ── THEMES ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+[data-theme="dark"]{--bg:#080808;--bg2:#111;--bg3:#1a1a1a;--text:#f0ede6;--muted:#888880;--b2:rgba(255,255,255,.07);--card:#111;--cardh:#1a1a1a;--nav:rgba(8,8,8,.92)}
+[data-theme="light"]{--bg:#fafaf8;--bg2:#f0ede5;--bg3:#e5e1d6;--text:#1a1a18;--muted:#6b6b64;--b2:rgba(0,0,0,.09);--card:#f0ede5;--cardh:#e5e1d6;--nav:rgba(250,250,248,.93)}
+:root{--gold:#c9a84c;--gold2:#e8c96a;--gr:201,168,76;--red:#e05252;--border:rgba(var(--gr),.22)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;transition:background .4s,color .4s}
+html[lang="ar"] body{font-family:'Cairo',sans-serif;font-size:16px}
 
-  <head>
+/* ── FONTS ── */
+[data-font="modern"] body{font-family:'Space Grotesk',sans-serif}
+[data-font="modern"] .logo,.hero h1,.section-title,.about-name{font-family:'Syne',sans-serif}
+[data-font="elegant"] body{font-family:'Raleway',sans-serif}
+[data-font="elegant"] .logo,.hero h1,.section-title,.about-name,.project-card h3,.testi-name{font-family:'Playfair Display',serif}
+[data-font="arabic"] body{font-family:'Cairo',sans-serif}
 
-    <meta charset="UTF-8">
-    <title>Eine Website für Alle und Keinen</title>
+/* ── HERO BACKGROUNDS ── */
+[data-herobg="grid"] .hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(var(--gr),.04) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--gr),.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+[data-herobg="dots"] .hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(var(--gr),.15) 1px,transparent 1px);background-size:30px 30px;pointer-events:none;z-index:0}
+[data-herobg="lines"] .hero::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(var(--gr),.03) 40px,rgba(var(--gr),.03) 41px);pointer-events:none;z-index:0}
+[data-herobg="mesh"] .hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 20% 50%,rgba(var(--gr),.06),transparent),radial-gradient(ellipse 60% 60% at 80% 20%,rgba(var(--gr),.04),transparent);pointer-events:none;z-index:0}
 
-    <link href="style.css" rel="stylesheet">
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:var(--nav);backdrop-filter:blur(14px);border-bottom:.5px solid var(--b2);animation:fadeDown .8s ease}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:none}}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--gold);letter-spacing:.05em;cursor:pointer;flex-shrink:0}
+html[lang="ar"] .logo{font-family:'Cairo',serif}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:11px;letter-spacing:.07em;text-transform:uppercase;transition:color .3s}
+html[lang="ar"] .nav-links a{letter-spacing:0;font-size:13px}
+.nav-links a:hover{color:var(--gold)}
+.nav-actions{display:flex;gap:.4rem;align-items:center}
+.btn-icon{width:34px;height:34px;border-radius:6px;border:.5px solid var(--b2);background:transparent;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .3s;flex-shrink:0}
+.btn-icon:hover{border-color:var(--gold);color:var(--gold)}
+.lang-sw{display:flex;gap:1px;border:.5px solid var(--b2);border-radius:6px;overflow:hidden;flex-shrink:0}
+.lang-btn{background:transparent;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;padding:5px 8px;cursor:pointer;transition:all .3s}
+.lang-btn.active{background:var(--gold);color:#080808}
+.lang-btn:hover:not(.active){color:var(--gold)}
+#edit-toggle{font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:transparent;color:var(--muted);border:.5px solid var(--b2);padding:6px 12px;border-radius:4px;cursor:pointer;transition:all .3s;white-space:nowrap}
+#edit-toggle:hover{border-color:var(--gold);color:var(--gold)}
+#edit-toggle.active{background:var(--gold);color:#080808;border-color:var(--gold);font-weight:500}
+.btn-export{background:var(--gold);color:#080808;border:none;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:4px;cursor:pointer;white-space:nowrap;transition:background .3s}
+html[lang="ar"] .btn-export{font-family:'Cairo',sans-serif;letter-spacing:0;font-size:11px}
+.btn-export:hover{background:var(--gold2)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:20px;height:1.5px;background:var(--muted);display:block}
+@media(max-width:900px){
+  .nav-links{display:none}.hamburger{display:flex}
+  nav{padding:1rem 1.5rem}
+  .mobile-menu{position:fixed;top:61px;left:0;right:0;background:var(--nav);backdrop-filter:blur(14px);border-bottom:.5px solid var(--b2);padding:1.5rem;display:none;flex-direction:column;gap:1rem;z-index:299}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{color:var(--muted);text-decoration:none;font-size:13px;padding:.4rem 0;border-bottom:.5px solid var(--b2)}
+}
 
-    <link rel="stylesheet" href="https://pyscript.net/releases/2024.3.1/core.css">
-    <script type="module" src="https://pyscript.net/releases/2024.3.1/core.js"></script>
+/* ── SPLASH ── */
+#splash{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;transition:opacity .7s ease,visibility .7s ease}
+#splash.hide{opacity:0;visibility:hidden;pointer-events:none}
+.splash-logo{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,10vw,5.5rem);font-weight:300;color:var(--gold);animation:sIn 1s ease both}
+html[lang="ar"] .splash-logo{font-family:'Cairo',serif}
+.splash-line{width:50px;height:1px;background:var(--gold);animation:sLine 1s .3s ease both;transform-origin:left}
+.splash-sub{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);animation:sIn 1s .5s ease both}
+html[lang="ar"] .splash-sub{letter-spacing:0;font-size:13px}
+.splash-dots{display:flex;gap:6px;margin-top:1.5rem;animation:sIn 1s .7s ease both}
+.splash-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:dBounce 1.2s ease-in-out infinite}
+.splash-dot:nth-child(2){animation-delay:.15s}.splash-dot:nth-child(3){animation-delay:.3s}
+@keyframes sIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes sLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes dBounce{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
 
-  </head>
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+#hero-canvas{display:none;position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero>*:not(#hero-canvas){position:relative;z-index:1}
+.hero-glow{position:absolute;top:20%;left:50%;transform:translateX(-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(var(--gr),.07),transparent 70%);pointer-events:none;animation:glow 6s ease-in-out infinite;z-index:0}
+@keyframes glow{0%,100%{opacity:.5;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.1)}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:.5px solid rgba(var(--gr),.25);color:var(--gold);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:7px 20px;border-radius:100px;margin-bottom:2.5rem;animation:fadeUp .9s .2s ease both}
+html[lang="ar"] .hero-badge{letter-spacing:0;font-size:13px}
+.badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:blink 2s ease-in-out infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,6.5rem);font-weight:300;line-height:1.05;margin-bottom:1.5rem;animation:fadeUp .9s .4s ease both}
+html[lang="ar"] .hero h1{font-family:'Cairo',serif;font-weight:400;line-height:1.3}
+.hero h1 em{font-style:italic;color:var(--gold)}
+html[lang="ar"] .hero h1 em{font-style:normal}
+.hero-sub{max-width:500px;color:var(--muted);font-weight:300;margin-bottom:3rem;animation:fadeUp .9s .6s ease both}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeUp .9s .8s ease both}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp 1s 1.2s ease both}
+.scroll-hint span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--gold),transparent)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 
-  <body>
-    <img src="https://imgur.com/MTR1Zvg.jpg" alt="Mein Foto">
+/* ── BUTTONS ── */
+.btn-gold{background:var(--gold);color:#080808;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:13px 30px;border-radius:4px;transition:background .3s,transform .2s}
+html[lang="ar"] .btn-gold{font-family:'Cairo',sans-serif;letter-spacing:0;font-size:13px;text-transform:none}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--text);border:.5px solid var(--b2);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:13px 30px;border-radius:4px;transition:all .3s}
+html[lang="ar"] .btn-outline{font-family:'Cairo',sans-serif;letter-spacing:0;font-size:13px;text-transform:none}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-1px)}
 
-    <h1 class="center">Hallo...</h1>
+/* ── SECTIONS ── */
+section{padding:6rem 3rem;max-width:1100px;margin:0 auto}
+@media(max-width:600px){section{padding:4rem 1.5rem}}
+.section-label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+html[lang="ar"] .section-label{letter-spacing:0;font-size:12px}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:300;line-height:1.1;margin-bottom:.75rem}
+html[lang="ar"] .section-title{font-family:'Cairo',serif;font-weight:400;line-height:1.4}
+.section-title em{font-style:italic;color:var(--gold)}
+html[lang="ar"] .section-title em{font-style:normal}
+.divider{width:50px;height:1px;background:var(--gold);opacity:.4;margin:1rem 0 2.5rem}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:.5rem;flex-wrap:wrap;gap:1rem}
 
-    <h1 class="left">Über mich:</h1>
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start}
+@media(max-width:700px){.about-grid{grid-template-columns:1fr;gap:2rem}}
+.avatar-box{width:100%;aspect-ratio:3/4;background:var(--bg2);border:.5px solid var(--b2);border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.avatar-box img{width:100%;height:100%;object-fit:cover;display:none}
+.avatar-box img.loaded{display:block}
+.avatar-ph{font-size:4rem;opacity:.2}
+.avatar-edit-btn{display:none;position:absolute;bottom:12px;right:12px;background:var(--gold);color:#080808;border:none;border-radius:4px;padding:7px 12px;font-size:11px;font-weight:500;cursor:pointer}
+html[dir="rtl"] .avatar-edit-btn{right:auto;left:12px}
+body.edit-mode .avatar-edit-btn{display:block}
+#avatar-input{display:none}
+.about-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;line-height:1.1;margin-bottom:1rem}
+html[lang="ar"] .about-name{font-family:'Cairo',serif;font-weight:400;line-height:1.4}
+.about-name em{font-style:italic;color:var(--gold)}
+html[lang="ar"] .about-name em{font-style:normal}
+.about-bio{color:var(--muted);font-weight:300;font-size:14px;line-height:1.8;margin-bottom:1rem}
+html[lang="ar"] .about-bio{font-size:15px;line-height:2}
+[contenteditable]{outline:none;border-radius:3px;transition:background .2s}
+body.edit-mode [contenteditable]:hover{background:rgba(var(--gr),.08);cursor:text}
+body.edit-mode [contenteditable]:focus{background:rgba(var(--gr),.1);box-shadow:0 0 0 1px rgba(var(--gr),.3)}
+.edit-hint{display:none;font-size:10px;color:var(--gold);margin-top:.3rem;opacity:.7}
+body.edit-mode .edit-hint{display:block}
+.skills-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.5rem;align-items:center}
+.skill-pill{font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:.5px solid var(--border);color:var(--muted);padding:5px 14px;border-radius:100px;transition:all .3s;display:inline-flex;align-items:center;gap:6px}
+html[lang="ar"] .skill-pill{letter-spacing:0;font-size:12px}
+.skill-pill:hover{border-color:var(--gold);color:var(--gold)}
+.skill-del{display:none;background:none;border:none;color:var(--red);cursor:pointer;font-size:14px;line-height:1;padding:0}
+body.edit-mode .skill-del{display:inline}
+.btn-add-skill{display:none;align-items:center;justify-content:center;width:30px;height:30px;border:.5px dashed rgba(var(--gr),.4);border-radius:50%;background:none;color:var(--gold);cursor:pointer;font-size:18px}
+body.edit-mode .btn-add-skill{display:flex}
 
-    <p>Ich mag es nicht, mich auf eine gewöhnliche Ebene zu begeben; daher wähle ich eine allzumenschliche Weise der Vorstellung: Zwei Dinge erfüllen mein Gemüt mit immer neuer und zunehmender Bewunderung und Ehrfurcht, je öfter und anhaltender sich das Nachdenken damit beschäftigt: die Suche nach einer mathematischen Lösung und die Programmierung eines IT-Projekts. Ich bin jemand, der sich freiwillig aus der Realität in die Welt der Mythologie und des Codings vertreiben lässt. Meine letzte Zuflucht finde ich in der Kunst, meine Therapie ist die Philosophie.</p>
+/* ── STATS ── */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));border:.5px solid var(--b2);margin-top:3.5rem}
+.stat-item{padding:2rem 1.5rem;border-right:.5px solid var(--b2);text-align:center;position:relative}
+html[dir="rtl"] .stat-item{border-right:none;border-left:.5px solid var(--b2)}
+html[dir="rtl"] .stat-item:last-child{border-left:none}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:var(--gold);display:block}
+html[lang="ar"] .stat-num{font-family:'Cairo',serif}
+.stat-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+html[lang="ar"] .stat-label{letter-spacing:0;font-size:11px}
+.stat-edit-btn{display:none;position:absolute;top:6px;right:6px;background:none;border:none;font-size:12px;cursor:pointer;color:var(--gold)}
+html[dir="rtl"] .stat-edit-btn{right:auto;left:6px}
+body.edit-mode .stat-edit-btn{display:block}
 
-    <p>Meine Lebensphilosophie lässt sich durch <strong>= e<sup>x</sup></strong> beschreiben. Vor allem Kant und Nietzsche prägen meine Persönlichkeit. Und getreu Nietzsche gilt für mich: Selbst wenn ich mit Ungeheuern kämpfe, passe ich auf, dass ich dabei nicht selbst zum Ungeheuer werde.</p>
+/* ── CV ── */
+.cv-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+@media(max-width:700px){.cv-grid{grid-template-columns:1fr;gap:2rem}}
+.cv-sec-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--gold);margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:.5px solid var(--b2)}
+html[lang="ar"] .cv-sec-title{font-family:'Cairo',serif;font-weight:600}
+.timeline{position:relative;padding-left:2rem}
+html[dir="rtl"] .timeline{padding-left:0;padding-right:2rem}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),transparent)}
+html[dir="rtl"] .timeline::before{left:auto;right:0}
+.tl-item{position:relative;padding-bottom:2.5rem;padding-left:1.5rem}
+html[dir="rtl"] .tl-item{padding-left:0;padding-right:1.5rem}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{position:absolute;left:-2rem;top:4px;width:10px;height:10px;border-radius:50%;background:var(--gold);border:2px solid var(--bg)}
+html[dir="rtl"] .tl-dot{left:auto;right:-2rem}
+.tl-year{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+html[lang="ar"] .tl-year{letter-spacing:0}
+.tl-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;margin-bottom:.2rem}
+html[lang="ar"] .tl-title{font-family:'Cairo',serif;font-weight:600}
+.tl-company{color:var(--muted);font-size:12px;margin-bottom:.3rem}
+.tl-desc{color:var(--muted);font-size:13px;font-weight:300;line-height:1.7}
+.tl-del-btn{display:none;position:absolute;right:0;top:0;background:none;border:none;color:var(--red);cursor:pointer;font-size:12px}
+html[dir="rtl"] .tl-del-btn{right:auto;left:0}
+body.edit-mode .tl-del-btn{display:block}
+.btn-add-tl{display:none;align-items:center;gap:6px;background:rgba(var(--gr),.08);color:var(--gold);border:.5px solid rgba(var(--gr),.25);border-radius:4px;font-family:'DM Sans',sans-serif;font-size:11px;padding:7px 14px;cursor:pointer;margin-top:1.5rem}
+html[lang="ar"] .btn-add-tl{font-family:'Cairo',sans-serif}
+body.edit-mode .btn-add-tl{display:inline-flex}
 
-    <h1 class="left">Ein paar meiner Facetten:</h1>
+/* ── SEARCH & FILTER ── */
+.search-filter-bar{display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;align-items:center}
+.search-box{flex:1;min-width:180px;display:flex;align-items:center;gap:10px;background:var(--bg2);border:.5px solid var(--b2);border-radius:4px;padding:0 14px;transition:border-color .3s}
+.search-box:focus-within{border-color:var(--gold)}
+.search-input{background:none;border:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:11px 0;outline:none;width:100%}
+html[lang="ar"] .search-input{font-family:'Cairo',sans-serif}
+.filter-btns{display:flex;gap:.5rem;flex-wrap:wrap}
+.filter-btn{background:transparent;border:.5px solid var(--b2);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:7px 14px;border-radius:100px;cursor:pointer;transition:all .3s}
+html[lang="ar"] .filter-btn{font-family:'Cairo',sans-serif;letter-spacing:0;font-size:12px}
+.filter-btn:hover,.filter-btn.active{background:rgba(var(--gr),.12);border-color:var(--gold);color:var(--gold)}
 
-    <ul>
-      <li>
-        <strong>Lieblingsgemälde:</strong> Die Alexanderschlacht bei Issos von Albrecht Altdorfer.
-      </li>
+/* ── CARDS ── */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.5px}
+.project-card{background:var(--card);border:.5px solid var(--b2);padding:2.2rem 2rem;position:relative;overflow:hidden;transition:background .4s,transform .3s;cursor:pointer}
+.project-card.hidden{display:none}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+html[dir="rtl"] .project-card::before{transform-origin:right}
+.project-card:hover::before{transform:scaleX(1)}
+.project-card:hover{background:var(--cardh);transform:translateY(-2px)}
+.card-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:rgba(var(--gr),.12);line-height:1;margin-bottom:1rem}
+html[lang="ar"] .card-num{font-family:'Cairo',serif}
+.card-tag{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:.5px solid rgba(var(--gr),.25);padding:3px 10px;border-radius:100px;margin-bottom:.7rem}
+html[lang="ar"] .card-tag{letter-spacing:0;font-size:11px}
+.project-card h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;margin-bottom:.5rem}
+html[lang="ar"] .project-card h3{font-family:'Cairo',serif;font-weight:600}
+.project-card p{color:var(--muted);font-size:13px;font-weight:300;line-height:1.7}
+.card-link{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-top:1.4rem;transition:gap .3s}
+.project-card:hover .card-link{gap:10px}
+.service-card{background:var(--bg);border:.5px solid var(--b2);padding:2.2rem 2rem;position:relative;transition:background .4s,border-color .4s}
+.service-card:hover{background:var(--card);border-color:rgba(var(--gr),.2)}
+.service-icon{font-size:2rem;margin-bottom:1rem}
+.service-card h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;margin-bottom:.5rem}
+html[lang="ar"] .service-card h3{font-family:'Cairo',serif;font-weight:600}
+.service-card p{color:var(--muted);font-size:13px;font-weight:300;line-height:1.7}
+.service-tag{display:inline-block;margin-top:1rem;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:.5px solid var(--b2);padding:3px 10px;border-radius:100px}
+.card-controls{display:none;position:absolute;top:.75rem;right:.75rem;gap:5px}
+html[dir="rtl"] .card-controls{right:auto;left:.75rem}
+body.edit-mode .card-controls{display:flex}
+.btn-ec,.btn-dc{width:28px;height:28px;border-radius:4px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px}
+.btn-ec{background:rgba(var(--gr),.15);color:var(--gold)}.btn-ec:hover{background:rgba(var(--gr),.3)}
+.btn-dc{background:rgba(224,82,82,.12);color:var(--red)}.btn-dc:hover{background:rgba(224,82,82,.28)}
+.btn-add{display:none;align-items:center;gap:8px;background:rgba(var(--gr),.08);color:var(--gold);border:.5px solid rgba(var(--gr),.25);border-radius:4px;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:9px 18px;cursor:pointer}
+html[lang="ar"] .btn-add{font-family:'Cairo',sans-serif;letter-spacing:0;font-size:13px}
+body.edit-mode .btn-add{display:inline-flex}
+.empty-state{padding:3rem;text-align:center;color:var(--muted);border:1px dashed var(--b2);border-radius:4px;font-size:13px;grid-column:1/-1}
+.empty-state span{font-size:2rem;display:block;margin-bottom:.75rem;opacity:.4}
 
-      <li>
-        <strong>Lebenseinstellung:</strong> Ewiges Mitglied der "Cat-Party" und ein Architekt der Moderne auf den Spuren der Antike.
-      </li>
+/* ── TESTIMONIALS ── */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5px}
+.testi-card{background:var(--card);border:.5px solid var(--b2);padding:2rem;position:relative;transition:background .4s}
+.testi-card:hover{background:var(--cardh);border-color:var(--border)}
+.testi-stars{color:var(--gold);font-size:14px;margin-bottom:1rem}
+.testi-text{color:var(--muted);font-size:13px;font-weight:300;line-height:1.8;font-style:italic;margin-bottom:1.5rem;padding-left:1rem;position:relative}
+html[dir="rtl"] .testi-text{padding-left:0;padding-right:1rem}
+.testi-text::before{content:'"';position:absolute;left:0;top:-4px;font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);opacity:.4;line-height:1}
+html[dir="rtl"] .testi-text::before{left:auto;right:0}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:rgba(var(--gr),.12);border:.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.testi-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400}
+html[lang="ar"] .testi-name{font-family:'Cairo',serif;font-weight:600}
+.testi-role{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+html[lang="ar"] .testi-role{letter-spacing:0;font-size:12px}
 
-      <li>
-        <strong>Coding & Mathe:</strong> Ich habe das klassische <code>print("Hello World")</code> längst hinter mir gelassen, vergesse niemals das <strong>+ C</strong> bei meinen Integralen.
-      </li>
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+@media(max-width:700px){.contact-grid{grid-template-columns:1fr;gap:2.5rem}}
+.contact-detail{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px;margin-bottom:.75rem}
+.c-icon{width:34px;height:34px;border:.5px solid rgba(var(--gr),.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.social-row{display:flex;gap:.75rem;margin-top:2rem;flex-wrap:wrap}
+.social-btn{display:inline-flex;align-items:center;gap:7px;border:.5px solid var(--b2);color:var(--muted);padding:9px 14px;border-radius:4px;font-size:12px;text-decoration:none;transition:all .3s;position:relative}
+.social-btn:hover{border-color:var(--gold);color:var(--gold)}
+.soc-edit{display:none;position:absolute;inset:0;background:rgba(var(--gr),.15);border-radius:4px;cursor:pointer;align-items:center;justify-content:center;font-size:12px}
+body.edit-mode .soc-edit{display:flex}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+html[lang="ar"] .field label{letter-spacing:0;font-size:12px}
+.field input,.field textarea{width:100%;background:var(--bg2);border:.5px solid var(--b2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:11px 14px;border-radius:4px;outline:none;transition:border-color .3s}
+html[lang="ar"] .field input,html[lang="ar"] .field textarea{font-family:'Cairo',sans-serif}
+.field input:focus,.field textarea:focus{border-color:var(--gold)}
+.field textarea{resize:vertical;min-height:110px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+.form-success{display:none;text-align:center;padding:2.5rem;border:.5px solid rgba(var(--gr),.3);border-radius:4px}
+.form-success.show{display:block}
 
-      <li>
-        Ich kann <strong>meinen Lebenslauf</strong> folgendermaßen zum Ausdruck bringen:
-        <h3>f(t) = sin³(t) + 0.3 sin(3t) e⁻⁰.¹ᵗ</h3>
-      </li>
+/* ── LIGHTBOX ── */
+.lightbox{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.95);backdrop-filter:blur(10px);flex-direction:column;align-items:center;justify-content:center;padding:2rem}
+.lightbox.open{display:flex}
+.lb-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:var(--text);font-size:1.8rem;cursor:pointer;opacity:.6}
+html[dir="rtl"] .lb-close{right:auto;left:1.5rem}
+.lb-close:hover{opacity:1}
+.lb-img{width:100%;max-width:560px;aspect-ratio:16/9;background:var(--bg2);border:.5px solid var(--b2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:1.5rem;overflow:hidden}
+.lb-img img{width:100%;height:100%;object-fit:cover}
+.lb-tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.lb-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--gold);margin-bottom:.5rem;text-align:center}
+html[lang="ar"] .lb-title{font-family:'Cairo',serif}
+.lb-desc{color:var(--muted);font-size:14px;max-width:560px;text-align:center;line-height:1.8;margin-bottom:2rem}
+.lb-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
 
-      <li>
-        Ich glaube fest an <strong>die Symmetrie und Gerechtigkeit</strong> des Lebens:
-        <h3>C(n, k) = C(n, n–k)</h3>
-        </li>
+/* ── MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg2);border:.5px solid rgba(var(--gr),.25);border-radius:8px;padding:2.5rem;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
+.modal h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:1.5rem;color:var(--gold)}
+html[lang="ar"] .modal h2{font-family:'Cairo',serif}
+.mfield{margin-bottom:1.1rem}
+.mfield label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+html[lang="ar"] .mfield label{letter-spacing:0;font-size:12px}
+.mfield input,.mfield textarea,.mfield select{width:100%;background:var(--bg3);border:.5px solid var(--b2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 14px;border-radius:4px;outline:none;transition:border-color .3s}
+html[lang="ar"] .mfield input,html[lang="ar"] .mfield textarea{font-family:'Cairo',sans-serif}
+.mfield input:focus,.mfield textarea:focus{border-color:var(--gold)}
+.mfield textarea{resize:vertical;min-height:80px}
+.modal-actions{display:flex;gap:.75rem;margin-top:1.8rem;justify-content:flex-end}
+.btn-cancel{background:transparent;color:var(--muted);border:.5px solid var(--b2);font-family:'DM Sans',sans-serif;font-size:12px;padding:10px 20px;border-radius:4px;cursor:pointer}
+.btn-save{background:var(--gold);color:#080808;border:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:10px 24px;border-radius:4px;cursor:pointer}
+.btn-save:hover{background:var(--gold2)}
 
-      <li>
-        Meine <strong>Botschaft:</strong>
-        <h3>x = 16 sin³(t)  ;  y = 13 cos(t) – 5 cos(2t) – 2 cos(3t) – cos(4t)</h3>
-        </li>
+/* ── PASSWORD MODAL ── */
+.pw-overlay{display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:1rem}
+.pw-overlay.open{display:flex}
+.pw-box{background:var(--bg2);border:.5px solid var(--border);border-radius:8px;padding:2.5rem;width:100%;max-width:360px;text-align:center}
+.pw-icon{font-size:2.5rem;margin-bottom:1rem}
+.pw-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--gold);margin-bottom:.4rem}
+html[lang="ar"] .pw-title{font-family:'Cairo',serif}
+.pw-sub{font-size:13px;color:var(--muted);margin-bottom:1.5rem;line-height:1.6}
+html[lang="ar"] .pw-sub{font-family:'Cairo',sans-serif;font-size:14px}
+.pw-input{width:100%;background:var(--bg3);border:.5px solid var(--b2);color:var(--text);font-size:16px;padding:12px 16px;border-radius:4px;outline:none;transition:border-color .3s;text-align:center;letter-spacing:.2em}
+.pw-input:focus{border-color:var(--gold)}
+.pw-error{font-size:12px;color:var(--red);margin-top:.5rem;min-height:18px}
+.pw-actions{display:flex;gap:.75rem;margin-top:1.5rem;justify-content:center}
+.pw-hint{font-size:11px;color:var(--muted);margin-top:1rem;opacity:.7}
+html[lang="ar"] .pw-hint{font-family:'Cairo',sans-serif}
 
-      <li>
-        Mein <strong>Lebensmotto / Lieblingszitat:</strong>
-        <h4>„Aufklärung ist der Ausgang des Menschen aus seiner selbstverschuldeten Unmündigkeit.“ — Immanuel Kant</h4>
-      </li>
+/* ── EXPORT PROGRESS ── */
+.export-prog{display:none;position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center;flex-direction:column;gap:1.5rem}
+.export-prog.open{display:flex}
+.export-prog h3{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--gold)}
+html[lang="ar"] .export-prog h3{font-family:'Cairo',serif}
+.export-prog p{font-size:13px;color:var(--muted)}
+html[lang="ar"] .export-prog p{font-family:'Cairo',sans-serif}
+.exp-bar-track{width:280px;height:3px;background:var(--b2);border-radius:2px;overflow:hidden}
+.exp-bar-fill{height:100%;background:var(--gold);border-radius:2px;width:0%;transition:width .4s ease}
 
-      <li>
-        Ich bediene mich der Programmierung, um meine kritischen Gedanken in einer Mischung aus <strong>Technik und Philosophie</strong> zu vermitteln.
+/* ── PANELS (Color/Font/BG) ── */
+#pf-panels{display:none;position:fixed;top:65px;right:1.5rem;z-index:400;background:var(--bg2);border:.5px solid var(--border);border-radius:8px;padding:1.2rem;box-shadow:0 10px 40px rgba(0,0,0,.4);min-width:220px}
+html[dir="rtl"] #pf-panels{right:auto;left:1.5rem}
+#pf-panels.open{display:block}
+#pf-panels h4{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;margin-top:.8rem}
+#pf-panels h4:first-child{margin-top:0}
+.color-swatches,.font-swatches,.bg-swatches{display:flex;gap:.5rem;flex-wrap:wrap}
+.swatch{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .2s,border-color .2s}
+.swatch:hover,.swatch.active{transform:scale(1.15);border-color:var(--text)}
+.font-pill{background:var(--bg3);border:.5px solid var(--b2);color:var(--muted);padding:5px 10px;border-radius:4px;cursor:pointer;font-size:12px;transition:all .3s}
+.font-pill:hover,.font-pill.active{border-color:var(--gold);color:var(--gold);background:rgba(var(--gr),.08)}
+.bg-pill{background:var(--bg3);border:.5px solid var(--b2);color:var(--muted);padding:5px 10px;border-radius:4px;cursor:pointer;font-size:11px;transition:all .3s}
+.bg-pill:hover,.bg-pill.active{border-color:var(--gold);color:var(--gold);background:rgba(var(--gr),.08)}
+.panel-divider{height:.5px;background:var(--b2);margin:.8rem 0}
+.panel-btn{width:100%;background:rgba(var(--gr),.08);color:var(--gold);border:.5px solid rgba(var(--gr),.25);border-radius:4px;font-family:'DM Sans',sans-serif;font-size:11px;padding:8px;cursor:pointer;margin-top:.4rem;transition:background .3s;text-align:left}
+html[lang="ar"] .panel-btn{font-family:'Cairo',sans-serif;text-align:right}
+.panel-btn:hover{background:rgba(var(--gr),.2)}
+.panel-btn.danger{color:var(--red);border-color:rgba(224,82,82,.2);background:rgba(224,82,82,.06)}
+.panel-btn.danger:hover{background:rgba(224,82,82,.15)}
 
-        <p class="center">Hierdurch ein Python-Script als Beispiel:</p>
-        <div class="center-container">
+/* ── SECTION MANAGER ── */
+#sec-mgr{position:fixed;top:0;right:-420px;width:400px;max-width:95vw;height:100vh;z-index:600;background:var(--bg2);border-left:.5px solid var(--border);box-shadow:-20px 0 60px rgba(0,0,0,.4);transition:right .4s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+html[dir="rtl"] #sec-mgr{right:auto;left:-420px;border-left:none;border-right:.5px solid var(--border);transition:left .4s cubic-bezier(.4,0,.2,1)}
+#sec-mgr.open{right:0}
+html[dir="rtl"] #sec-mgr.open{right:auto;left:0}
+.sm-head{display:flex;align-items:center;justify-content:space-between;padding:1.5rem;border-bottom:.5px solid var(--b2);flex-shrink:0}
+.sm-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--gold)}
+html[lang="ar"] .sm-title{font-family:'Cairo',serif}
+.sm-body{flex:1;overflow-y:auto;padding:1rem 1.5rem}
+.sm-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;margin-top:1.2rem}
+html[lang="ar"] .sm-label{letter-spacing:0}
+.sec-row{display:flex;align-items:center;gap:.75rem;padding:.7rem 0;border-bottom:.5px solid var(--b2)}
+.sec-row:last-child{border-bottom:none}
+.sec-icon{font-size:1.2rem;width:32px;text-align:center;flex-shrink:0}
+.sec-name{flex:1;font-size:14px}
+.sec-name.off{color:var(--muted);text-decoration:line-through}
+html[lang="ar"] .sec-name{font-family:'Cairo',sans-serif}
+.toggle{position:relative;width:38px;height:21px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0;position:absolute}
+.tog-sl{position:absolute;inset:0;background:var(--b2);border-radius:21px;cursor:pointer;transition:background .3s}
+.tog-sl::before{content:'';position:absolute;width:15px;height:15px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform .3s}
+.toggle input:checked+.tog-sl{background:var(--gold)}
+.toggle input:checked+.tog-sl::before{transform:translateX(17px)}
+html[dir="rtl"] .toggle input:checked+.tog-sl::before{transform:translateX(-17px)}
+.sec-acts{display:flex;gap:4px;flex-shrink:0}
+.sec-act{width:26px;height:26px;border-radius:4px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px}
+.sec-act.edit{background:rgba(var(--gr),.12);color:var(--gold)}
+.sec-act.del{background:rgba(224,82,82,.1);color:var(--red)}
+.sm-footer{padding:1.2rem 1.5rem;border-top:.5px solid var(--b2);flex-shrink:0}
+.btn-add-sec{width:100%;background:rgba(var(--gr),.08);color:var(--gold);border:.5px solid rgba(var(--gr),.3);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:11px;cursor:pointer;transition:background .3s}
+html[lang="ar"] .btn-add-sec{font-family:'Cairo',sans-serif}
+.btn-add-sec:hover{background:rgba(var(--gr),.18)}
+.custom-section{padding:6rem 3rem;max-width:1100px;margin:0 auto}
+@media(max-width:600px){.custom-section{padding:4rem 1.5rem}}
+.custom-section.hidden-sec,.hidden-sec{display:none!important}
+.custom-content{color:var(--muted);font-size:15px;line-height:1.9;font-weight:300;white-space:pre-wrap;max-width:780px}
+html[lang="ar"] .custom-content{font-family:'Cairo',sans-serif;font-size:16px;line-height:2.1}
+#sec-backdrop{display:none;position:fixed;inset:0;z-index:599;background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
+#sec-backdrop.open{display:block}
+body.edit-mode #sec-mgr-btn{display:flex!important}
 
-          <button class="py-btn" onclick="
-            let win = window.open('', '_blank', 'width=600,height=400');
-            win.document.write(`
-              <html>
-                <head>
-                  <title>Philosophie Script</title>
-                  <link rel='stylesheet' href='https://pyscript.net/releases/2024.3.1/core.css'>
-                  <script type='module' src='https://pyscript.net/releases/2024.3.1/core.js'></script>
-                  <style>
-                    body { background: #2c3e50; color: #ecf0f1; font-family: monospace; padding: 20px; }
-                  </style>
-                </head>
-                <body>
-                  <h2>Python Philosophie-Script:</h2>
+/* ── BACK TO TOP ── */
+#back-top{position:fixed;bottom:2rem;right:2rem;z-index:200;width:44px;height:44px;border-radius:50%;background:var(--gold);color:#080808;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 20px rgba(var(--gr),.35);opacity:0;transform:translateY(20px);transition:opacity .4s,transform .4s;pointer-events:none}
+html[dir="rtl"] #back-top{right:auto;left:2rem}
+#back-top.show{opacity:1;transform:none;pointer-events:all}
+#back-top:hover{background:var(--gold2)}
 
-                  <py-config>
-                    files = ['heartm.py']
-                  </py-config>
+/* ── COOKIE ── */
+#cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:400;background:var(--bg2);border-top:.5px solid var(--b2);padding:1.2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;transform:translateY(100%);transition:transform .5s ease}
+#cookie-banner.show{transform:none}
+.cookie-text{font-size:13px;color:var(--muted);font-weight:300;max-width:600px}
+html[lang="ar"] .cookie-text{font-family:'Cairo',sans-serif;font-size:14px}
+.cookie-actions{display:flex;gap:.75rem}
+.btn-ca{background:var(--gold);color:#080808;border:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:9px 20px;border-radius:4px;cursor:pointer}
+html[lang="ar"] .btn-ca{font-family:'Cairo',sans-serif}
+.btn-ca:hover{background:var(--gold2)}
+.btn-cd{background:transparent;color:var(--muted);border:.5px solid var(--b2);font-family:'DM Sans',sans-serif;font-size:12px;padding:9px 20px;border-radius:4px;cursor:pointer}
+html[lang="ar"] .btn-cd{font-family:'Cairo',sans-serif}
 
-                  <py-script>
-                    import heartm
-                    heartm.philosophie_ausfuehren()
-                  </py-script>
+/* ── CHAT WIDGET ── */
+#chat-widget{position:fixed;bottom:5.5rem;right:2rem;z-index:250;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem}
+html[dir="rtl"] #chat-widget{right:auto;left:2rem;align-items:flex-start}
+.chat-bubble{background:var(--bg2);border:.5px solid var(--border);border-radius:16px 16px 4px 16px;padding:1.2rem;max-width:260px;box-shadow:0 8px 30px rgba(0,0,0,.3);display:none;position:relative;animation:chatPop .3s ease}
+html[dir="rtl"] .chat-bubble{border-radius:16px 16px 16px 4px}
+.chat-bubble.show{display:block}
+@keyframes chatPop{from{opacity:0;transform:scale(.9) translateY(10px)}to{opacity:1;transform:none}}
+.chat-close{position:absolute;top:.5rem;right:.75rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px}
+html[dir="rtl"] .chat-close{right:auto;left:.75rem}
+.chat-bubble p{font-size:13px;color:var(--text);margin-bottom:.75rem;line-height:1.6}
+html[lang="ar"] .chat-bubble p{font-family:'Cairo',sans-serif;font-size:14px}
+.chat-input{width:100%;background:var(--bg3);border:.5px solid var(--b2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;padding:8px 10px;border-radius:4px;outline:none;transition:border-color .3s;margin-bottom:.5rem}
+html[lang="ar"] .chat-input{font-family:'Cairo',sans-serif}
+.chat-input:focus{border-color:var(--gold)}
+.chat-send{background:var(--gold);color:#080808;border:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:8px 16px;border-radius:4px;cursor:pointer;float:right}
+html[dir="rtl"] .chat-send{float:left}
+.chat-send:hover{background:var(--gold2)}
+.chat-sent{display:none;text-align:center;color:var(--gold);font-size:13px;padding:.5rem}
+html[lang="ar"] .chat-sent{font-family:'Cairo',sans-serif}
+.chat-sent.show{display:block}
+.chat-btn{width:52px;height:52px;border-radius:50%;background:var(--gold);color:#080808;border:none;cursor:pointer;font-size:22px;box-shadow:0 4px 20px rgba(var(--gr),.4);transition:transform .3s,background .3s;display:flex;align-items:center;justify-content:center;position:relative}
+.chat-btn:hover{background:var(--gold2);transform:scale(1.08)}
+.chat-badge{position:absolute;top:-2px;right:-2px;width:14px;height:14px;background:var(--red);border-radius:50%;font-size:9px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
 
-                </body>
-              </html>
-            `);
-            win.document.close();
-          ">Python-Script</button>
+/* ── EDIT BANNER ── */
+#edit-banner{display:none;position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--gold);color:#080808;z-index:300;padding:10px 24px;border-radius:100px;font-size:12px;font-weight:500;white-space:nowrap;box-shadow:0 4px 30px rgba(var(--gr),.35)}
+html[lang="ar"] #edit-banner{font-family:'Cairo',sans-serif;font-size:13px}
 
-        </div>
-      </li>
+/* ── BG THEME PILL ── */
+.bg-theme-pill{background:var(--bg3);border:.5px solid var(--b2);color:var(--muted);padding:5px 10px;border-radius:4px;cursor:pointer;font-size:11px;transition:all .3s;display:inline-block;margin:.2rem .1rem}
+.bg-theme-pill:hover,.bg-theme-pill.active{border-color:var(--gold);color:var(--gold);background:rgba(var(--gr),.08)}
+
+/* ── PROJECT LAYOUT TOGGLE ── */
+.layout-toggle{display:flex;gap:.4rem;align-items:center}
+.layout-btn{width:30px;height:30px;border:.5px solid var(--b2);background:transparent;color:var(--muted);border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .3s}
+.layout-btn.active,.layout-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(var(--gr),.08)}
+
+/* ── PROJECT LIST LAYOUT ── */
+[data-projlayout="list"] .cards-grid{grid-template-columns:1fr;gap:0}
+[data-projlayout="list"] .project-card{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1.5rem;padding:1.4rem 2rem}
+[data-projlayout="list"] .project-card::before{display:none}
+[data-projlayout="list"] .card-num{font-size:1.8rem;margin-bottom:0;line-height:1;min-width:50px}
+[data-projlayout="list"] .project-card h3{font-size:1.2rem;margin-bottom:.2rem}
+[data-projlayout="list"] .project-card p{font-size:12px;margin-bottom:0}
+[data-projlayout="list"] .card-tag{display:block;margin-bottom:.3rem;font-size:9px}
+[data-projlayout="list"] .card-link{margin-top:.5rem;font-size:10px;display:flex;align-items:center;gap:4px;white-space:nowrap}
+[data-projlayout="list"] .project-card:hover{transform:translateX(4px)}
+html[dir="rtl"][data-projlayout="list"] .project-card:hover{transform:translateX(-4px)}
+[data-projlayout="list"] .project-card:not(:last-child){border-bottom:.5px solid var(--b2)}
+
+/* ── WIDE LAYOUT ── */
+[data-projlayout="wide"] .cards-grid{grid-template-columns:1fr}
+[data-projlayout="wide"] .project-card{display:grid;grid-template-columns:1fr 2fr;gap:2rem;padding:2.5rem}
+[data-projlayout="wide"] .card-left{display:flex;flex-direction:column;gap:.5rem}
+[data-projlayout="wide"] .project-card::before{height:100%;width:2px;right:auto;left:0;top:0;transform:scaleY(0);transform-origin:top}
+html[dir="rtl"][data-projlayout="wide"] .project-card::before{left:auto;right:0}
+[data-projlayout="wide"] .project-card:hover::before{transform:scaleY(1)}
+
+/* ── PROJ CARD LINK STYLE ── */
+.proj-visit-link{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#080808;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:8px 18px;border-radius:4px;text-decoration:none;transition:background .3s,transform .2s;margin-top:1rem}
+html[lang="ar"] .proj-visit-link{letter-spacing:0;font-size:12px}
+.proj-visit-link:hover{background:var(--gold2);transform:translateY(-1px)}
+.proj-no-link{display:inline-flex;align-items:center;gap:6px;border:.5px solid var(--b2);color:var(--muted);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:8px 18px;border-radius:4px;margin-top:1rem}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ── QR MODAL ── */
+.qr-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1rem}
+.qr-overlay.open{display:flex}
+.qr-box{background:var(--bg2);border:.5px solid var(--border);border-radius:8px;padding:2rem;text-align:center;width:100%;max-width:320px}
+.qr-box h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;color:var(--gold);margin-bottom:.4rem}
+html[lang="ar"] .qr-box h2{font-family:'Cairo',serif}
+.qr-box p{color:var(--muted);font-size:13px;margin-bottom:1.2rem}
+#qr-code{display:flex;justify-content:center;margin-bottom:1.2rem}
+#qr-code canvas,#qr-code img{border-radius:6px;padding:10px;background:#fff}
+.qr-url{font-size:11px;color:var(--muted);word-break:break-all;margin-bottom:1.2rem;padding:.6rem 1rem;background:var(--bg3);border-radius:4px;font-family:monospace}
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-logo" id="splash-name">Portfolio</div>
+  <div class="splash-line"></div>
+  <div class="splash-sub" id="splash-sub">Web Development & Design</div>
+  <div class="splash-dots">
+    <div class="splash-dot"></div><div class="splash-dot"></div><div class="splash-dot"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo" onclick="scrollTo({top:0,behavior:'smooth'})">Portfolio</div>
+  <div class="nav-right">
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#ueber" data-key="nav_about">Über mich</a></li>
+      <li><a href="#cv" data-key="nav_cv">Lebenslauf</a></li>
+      <li><a href="#projekte" data-key="nav_proj">Projekte</a></li>
+      <li><a href="#dienste" data-key="nav_srv">Dienste</a></li>
+      <li><a href="#testi" data-key="nav_testi">Bewertungen</a></li>
+      <li><a href="#kontakt" data-key="nav_contact">Kontakt</a></li>
     </ul>
+    <div class="nav-actions">
+      <div class="lang-sw">
+        <button class="lang-btn" onclick="setLang('de')">DE</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('ar')">عر</button>
+      </div>
+      <button class="btn-icon" id="sec-mgr-btn" onclick="openSecMgr()" title="Sektionen" style="display:none">⚙️</button>
+      <button class="btn-icon" onclick="openQR()" title="QR">📱</button>
+      <button class="btn-icon" onclick="togglePanels()" title="Design">🎨</button>
+      <button class="btn-icon" onclick="toggleTheme()" id="theme-btn" title="Theme">🌙</button>
+      <button class="btn-export" onclick="startExport()">📦 Export</button>
+      <button id="edit-toggle" onclick="handleEditToggle()">✏️ <span id="edit-label">Bearbeiten</span></button>
+    </div>
+    <div class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
 
-  </body>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#ueber" onclick="closeMobile()" data-key="nav_about">Über mich</a>
+  <a href="#cv" onclick="closeMobile()" data-key="nav_cv">Lebenslauf</a>
+  <a href="#projekte" onclick="closeMobile()" data-key="nav_proj">Projekte</a>
+  <a href="#dienste" onclick="closeMobile()" data-key="nav_srv">Dienste</a>
+  <a href="#testi" onclick="closeMobile()" data-key="nav_testi">Bewertungen</a>
+  <a href="#kontakt" onclick="closeMobile()" data-key="nav_contact">Kontakt</a>
+</div>
+
+<!-- DESIGN PANELS -->
+<div id="pf-panels">
+  <h4 id="lbl-color">Akzentfarbe</h4>
+  <div class="color-swatches" id="color-swatches"></div>
+  <div class="panel-divider"></div>
+  <h4 id="lbl-font">Schriftart</h4>
+  <div class="font-swatches" id="font-swatches"></div>
+  <div class="panel-divider"></div>
+  <h4 id="lbl-bg">Hintergrund</h4>
+  <div class="bg-swatches" id="bg-swatches"></div>
+  <div class="panel-divider"></div>
+  <h4 id="lbl-bgtheme">Farb-Theme</h4>
+  <div id="bg-theme-pills"></div>
+  <div class="panel-divider"></div>
+  <h4 id="lbl-data">Daten</h4>
+  <button class="panel-btn" onclick="exportJSON()">📤 JSON Export</button>
+  <button class="panel-btn" onclick="document.getElementById('import-file').click()">📥 JSON Import</button>
+  <button class="panel-btn" onclick="printCV()">🖨️ CV als PDF</button>
+  <button class="panel-btn" onclick="changePw()">🔑 Passwort ändern</button>
+  <button class="panel-btn danger" onclick="resetAll()">🗑️ Alles zurücksetzen</button>
+  <input type="file" id="import-file" accept=".json" style="display:none" onchange="importJSON(event)"/>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-glow"></div>
+  <div class="hero-badge"><div class="badge-dot"></div><span id="hero-badge-text">Verfügbar für neue Projekte</span></div>
+  <h1 id="hero-h1">Ich entwickle<br/><em id="hero-em">digitale Erlebnisse</em></h1>
+  <p class="hero-sub" id="hero-sub">Hochwertige Websites und digitale Dienstleistungen — scharf in der Idee, präzise in der Ausführung.</p>
+  <div class="hero-cta">
+    <button class="btn-gold" onclick="document.getElementById('projekte').scrollIntoView({behavior:'smooth'})" id="cta1">Projekte ansehen</button>
+    <button class="btn-outline" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})" id="cta2">Kontakt aufnehmen</button>
+  </div>
+  <div class="scroll-hint"><span id="scroll-txt">Scroll</span><div class="scroll-line"></div></div>
+</div>
+
+<!-- ÜBER MICH -->
+<section id="ueber">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="avatar-box">
+        <img id="avatar-img" alt=""/>
+        <div class="avatar-ph" id="avatar-ph">👤</div>
+      </div>
+      <button class="avatar-edit-btn" onclick="document.getElementById('avatar-input').click()">📷 Foto</button>
+      <input type="file" id="avatar-input" accept="image/*" onchange="loadAvatar(event)"/>
+    </div>
+    <div>
+      <p class="section-label reveal" id="lbl-about">✦ Über mich</p>
+      <h2 class="about-name reveal d1">
+        <span contenteditable="true" id="f-vorname">Dein Vorname</span>
+        <em contenteditable="true" id="f-nachname"> Nachname</em>
+      </h2>
+      <div class="divider reveal d2"></div>
+      <p class="about-bio reveal d2" contenteditable="true" id="f-bio">Leidenschaftlicher Web-Entwickler mit Gespür für hochwertige digitale Erlebnisse.</p>
+      <p class="about-bio reveal d3" contenteditable="true" id="f-bio2">Von der Idee bis zum fertigen Produkt — präzise, kreativ, professionell.</p>
+      <p class="edit-hint" id="edit-hint-txt">💡 Text anklicken zum Bearbeiten</p>
+      <div class="skills-wrap reveal d3" id="skills-wrap"></div>
+    </div>
+  </div>
+  <div class="stats-row reveal d1" id="stats-row">
+    <div class="stat-item"><button class="stat-edit-btn" onclick="editStat(0)">✏️</button><span class="stat-num" id="stat0">0</span><div class="stat-label" id="stat0-lbl">Projekte</div></div>
+    <div class="stat-item"><button class="stat-edit-btn" onclick="editStat(1)">✏️</button><span class="stat-num" id="stat1">0</span><div class="stat-label" id="stat1-lbl">Kunden</div></div>
+    <div class="stat-item"><button class="stat-edit-btn" onclick="editStat(2)">✏️</button><span class="stat-num" id="stat2">0</span><div class="stat-label" id="stat2-lbl">Jahre</div></div>
+    <div class="stat-item"><span class="stat-num">100%</span><div class="stat-label" id="stat3-lbl">Remote</div></div>
+  </div>
+</section>
+
+<!-- CV -->
+<section id="cv" style="padding-top:2rem">
+  <div class="section-head">
+    <div>
+      <p class="section-label reveal" id="lbl-cv">✦ Lebenslauf</p>
+      <h2 class="section-title reveal d1"><span id="cv-title">Mein</span> <em id="cv-em">Werdegang</em></h2>
+    </div>
+    <button class="btn-outline" onclick="printCV()" style="display:flex;align-items:center;gap:8px;padding:9px 18px">🖨️ <span id="pdf-btn-txt">PDF Export</span></button>
+  </div>
+  <div class="divider reveal d2"></div>
+  <div class="cv-grid reveal d2">
+    <div>
+      <div class="cv-sec-title" id="cv-exp-title">💼 Erfahrung</div>
+      <div class="timeline" id="tl-exp"></div>
+      <button class="btn-add-tl" onclick="addTl('exp')" id="add-exp-btn">+ Erfahrung</button>
+    </div>
+    <div>
+      <div class="cv-sec-title" id="cv-edu-title">🎓 Ausbildung</div>
+      <div class="timeline" id="tl-edu"></div>
+      <button class="btn-add-tl" onclick="addTl('edu')" id="add-edu-btn">+ Ausbildung</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROJEKTE -->
+<section id="projekte" style="padding-top:2rem">
+  <div class="section-head">
+    <div>
+      <p class="section-label reveal" id="lbl-proj">✦ Meine Arbeit</p>
+      <h2 class="section-title reveal d1"><span id="proj-title">Ausgewählte</span> <em id="proj-em">Projekte</em></h2>
+    </div>
+    <button class="btn-add" onclick="openModal('projekt')" id="add-proj-btn">+ Projekt</button>
+    <div class="layout-toggle" title="Layout">
+      <button class="layout-btn" id="layout-grid-btn" onclick="setProjLayout('grid')" title="Kacheln">⊞</button>
+      <button class="layout-btn" id="layout-list-btn" onclick="setProjLayout('list')" title="Liste">☰</button>
+      <button class="layout-btn" id="layout-wide-btn" onclick="setProjLayout('wide')" title="Breit">▬</button>
+    </div>
+  </div>
+  <div class="divider reveal d2"></div>
+  <div class="search-filter-bar reveal d2">
+    <div class="search-box">
+      <span>🔍</span>
+      <input class="search-input" id="search-input" placeholder="Projekte suchen..." oninput="filterProjects()"/>
+    </div>
+    <div class="filter-btns" id="filter-btns"></div>
+  </div>
+  <div class="cards-grid" id="projekte-grid"></div>
+</section>
+
+<!-- DIENSTE -->
+<section id="dienste" style="padding-top:2rem">
+  <div class="section-head">
+    <div>
+      <p class="section-label reveal" id="lbl-srv">✦ Was ich anbiete</p>
+      <h2 class="section-title reveal d1"><span id="srv-title">Meine</span> <em id="srv-em">Dienstleistungen</em></h2>
+    </div>
+    <button class="btn-add" onclick="openModal('dienst')" id="add-srv-btn">+ Dienst</button>
+  </div>
+  <div class="divider reveal d2"></div>
+  <div class="cards-grid" id="dienste-grid"></div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testi" style="padding-top:2rem">
+  <div class="section-head">
+    <div>
+      <p class="section-label reveal" id="lbl-testi">✦ Kundenstimmen</p>
+      <h2 class="section-title reveal d1"><span id="testi-title">Was</span> <em id="testi-em">Kunden sagen</em></h2>
+    </div>
+    <button class="btn-add" onclick="openModal('testi')" id="add-testi-btn">+ Bewertung</button>
+  </div>
+  <div class="divider reveal d2"></div>
+  <div class="testi-grid" id="testi-grid"></div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt" style="padding-top:2rem">
+  <div class="contact-grid">
+    <div>
+      <p class="section-label reveal" id="lbl-contact">✦ Kontakt</p>
+      <h2 class="section-title reveal d1"><span id="contact-title">Lass uns</span> <em id="contact-em">reden</em></h2>
+      <div class="divider reveal d2"></div>
+      <p class="reveal d2" style="color:var(--muted);font-weight:300;font-size:14px;margin-bottom:1.5rem" id="contact-desc">Hast du ein Projekt? Ich antworte innerhalb von 24 Stunden.</p>
+      <div class="contact-detail reveal d3"><div class="c-icon">📧</div><span contenteditable="true" id="f-email" style="color:var(--gold)">hallo@deinedomain.de</span></div>
+      <div class="contact-detail reveal d3"><div class="c-icon">📍</div><span contenteditable="true" id="f-location">Deutschland — Remote worldwide</span></div>
+      <div class="social-row reveal d4" id="social-row"></div>
+    </div>
+    <div class="reveal d2">
+      <div id="contact-form">
+        <div class="form-row">
+          <div class="field"><label id="lbl-fn">Vorname</label><input type="text" id="cf-fn"/></div>
+          <div class="field"><label id="lbl-ln">Nachname</label><input type="text" id="cf-ln"/></div>
+        </div>
+        <div class="field"><label id="lbl-em">E-Mail *</label><input type="email" id="cf-em"/></div>
+        <div class="field"><label id="lbl-su">Betreff</label><input type="text" id="cf-su"/></div>
+        <div class="field"><label id="lbl-msg">Nachricht *</label><textarea id="cf-ms"></textarea></div>
+        <button class="btn-gold" onclick="sendForm()" id="form-send-btn">Nachricht senden →</button>
+      </div>
+      <div class="form-success" id="form-ok">
+        <div style="font-size:2.5rem;margin-bottom:1rem">✅</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;margin-bottom:.5rem" id="form-thanks">Vielen Dank!</h3>
+        <p style="color:var(--muted);font-size:14px" id="form-thanks-sub">Ich melde mich bald!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOM SECTIONS -->
+<div id="custom-sections"></div>
+
+<footer>
+  <div class="logo" style="font-size:1.1rem">Portfolio</div>
+  <div id="footer-copy">© 2026 — Mit ❤️ gebaut</div>
+  <div>
+    <a href="#ueber" data-key="nav_about" style="color:var(--muted);text-decoration:none;transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Über mich</a> ·
+    <a href="#projekte" data-key="nav_proj" style="color:var(--muted);text-decoration:none;transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Projekte</a> ·
+    <a href="#kontakt" data-key="nav_contact" style="color:var(--muted);text-decoration:none;transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Kontakt</a>
+  </div>
+</footer>
+
+<button id="back-top" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- COOKIE -->
+<div id="cookie-banner">
+  <p class="cookie-text" id="cookie-txt">🍪 Diese Website verwendet Cookies für eine bessere Nutzererfahrung.</p>
+  <div class="cookie-actions">
+    <button class="btn-cd" onclick="dismissCookie(false)" id="cookie-decline-btn">Ablehnen</button>
+    <button class="btn-ca" onclick="dismissCookie(true)" id="cookie-accept-btn">Akzeptieren</button>
+  </div>
+</div>
+
+<!-- CHAT WIDGET -->
+<div id="chat-widget">
+  <div class="chat-bubble" id="chat-bubble">
+    <button class="chat-close" onclick="closeChatBubble()">✕</button>
+    <p id="chat-greeting">👋 Hallo! Wie kann ich dir helfen?</p>
+    <div id="chat-form-wrap">
+      <input class="chat-input" id="chat-name" placeholder="Dein Name"/>
+      <input class="chat-input" id="chat-email-field" type="email" placeholder="E-Mail"/>
+      <textarea class="chat-input" id="chat-msg-field" placeholder="Deine Nachricht..." style="min-height:70px;resize:none"></textarea>
+      <button class="chat-send" onclick="sendChatMsg()" id="chat-send-btn">Senden →</button>
+    </div>
+    <div class="chat-sent" id="chat-sent">✅ <span id="chat-sent-txt">Nachricht gesendet!</span></div>
+  </div>
+  <button class="chat-btn" onclick="toggleChat()" id="chat-btn">
+    💬
+    <div class="chat-badge" id="chat-badge">1</div>
+  </button>
+</div>
+
+<!-- SECTION MANAGER BACKDROP -->
+<div id="sec-backdrop" onclick="closeSecMgr()"></div>
+
+<!-- SECTION MANAGER -->
+<div id="sec-mgr">
+  <div class="sm-head">
+    <div class="sm-title" id="sm-title">⚙️ Sektionen</div>
+    <button style="background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer" onclick="closeSecMgr()">✕</button>
+  </div>
+  <div class="sm-body">
+    <div class="sm-label" id="sm-builtin-lbl">Standard-Sektionen</div>
+    <div id="builtin-list"></div>
+    <div class="sm-label" id="sm-custom-lbl" style="margin-top:1.2rem">Eigene Sektionen</div>
+    <div id="custom-list"></div>
+  </div>
+  <div class="sm-footer">
+    <button class="btn-add-sec" onclick="addCustomSec()" id="add-sec-btn">+ Neue Sektion</button>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <div class="lb-img" id="lb-img">🖼️</div>
+  <div class="lb-tag" id="lb-tag"></div>
+  <div class="lb-title" id="lb-title"></div>
+  <div class="lb-desc" id="lb-desc"></div>
+  <div class="lb-actions" id="lb-actions"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h2 id="modal-title">Neu</h2>
+    <div id="modal-fields"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" id="modal-cancel-btn" onclick="closeModal()">Abbrechen</button>
+      <button class="btn-save" id="modal-save-btn" onclick="saveItem()">Speichern</button>
+    </div>
+  </div>
+</div>
+
+<!-- PASSWORD MODAL -->
+<div class="pw-overlay" id="pw-overlay">
+  <div class="pw-box">
+    <div class="pw-icon">🔒</div>
+    <div class="pw-title" id="pw-title">Passwort erstellen</div>
+    <p class="pw-sub" id="pw-sub">Wähle ein Passwort für den Bearbeitungsmodus.</p>
+    <input class="pw-input" id="pw-input" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')submitPw()"/>
+    <div class="pw-error" id="pw-error"></div>
+    <div class="pw-actions">
+      <button class="btn-outline" onclick="closePwModal()" id="pw-cancel-btn">Abbrechen</button>
+      <button class="btn-gold" onclick="submitPw()" id="pw-ok-btn">Bestätigen</button>
+    </div>
+    <p class="pw-hint" id="pw-hint"></p>
+  </div>
+</div>
+
+<!-- EXPORT PROGRESS -->
+<div class="export-prog" id="export-prog">
+  <h3 id="exp-title">📦 Export läuft...</h3>
+  <p id="exp-sub">Daten werden eingebettet...</p>
+  <div class="exp-bar-track"><div class="exp-bar-fill" id="exp-bar"></div></div>
+</div>
+
+<!-- QR MODAL -->
+<div class="qr-overlay" id="qr-overlay">
+  <div class="qr-box">
+    <h2>QR Code</h2>
+    <p id="qr-desc">Scanne den Code um diese Website zu öffnen.</p>
+    <div id="qr-code"></div>
+    <div class="qr-url" id="qr-url"></div>
+    <div style="display:flex;gap:.75rem;justify-content:center">
+      <button class="btn-outline" onclick="closeQR()" id="qr-close-btn">Schließen</button>
+      <button class="btn-gold" onclick="downloadQR()" id="qr-dl-btn">📥 Download</button>
+    </div>
+  </div>
+</div>
+
+<div id="edit-banner">✏️ Bearbeitungsmodus</div>
+
+<script>
+'use strict';
+// ── STORAGE ───────────────────────────────────────────────────────────
+const K='pf_final_';
+function ls(k,d){try{const v=localStorage.getItem(K+k);return v!==null?JSON.parse(v):d;}catch{return d;}}
+function ss(k,v){try{localStorage.setItem(K+k,JSON.stringify(v));}catch{}}
+function lsS(k,d=''){return localStorage.getItem(K+k)||d;}
+function ssS(k,v){localStorage.setItem(K+k,v);}
+
+// ── TRANSLATIONS ──────────────────────────────────────────────────────
+const TX={
+  de:{
+    nav_about:'Über mich',nav_cv:'Lebenslauf',nav_proj:'Projekte',nav_srv:'Dienste',nav_testi:'Bewertungen',nav_contact:'Kontakt',
+    hero_badge:'Verfügbar für neue Projekte',hero_h1:'Ich entwickle',hero_em:'digitale Erlebnisse',
+    hero_sub:'Hochwertige Websites und digitale Dienstleistungen — scharf in der Idee, präzise in der Ausführung.',
+    cta1:'Projekte ansehen',cta2:'Kontakt aufnehmen',scroll:'Scroll',
+    lbl_about:'✦ Über mich',edit_hint:'💡 Text anklicken zum Bearbeiten',upload_photo:'📷 Foto',
+    stat0:'Projekte',stat1:'Kunden',stat2:'Jahre',stat3:'Remote',
+    lbl_cv:'✦ Lebenslauf',cv_title:'Mein',cv_em:'Werdegang',cv_exp:'💼 Erfahrung',cv_edu:'🎓 Ausbildung',
+    add_exp:'+ Erfahrung',add_edu:'+ Ausbildung',
+    lbl_proj:'✦ Meine Arbeit',proj_title:'Ausgewählte',proj_em:'Projekte',add_proj:'+ Projekt',
+    search_ph:'Projekte suchen...',filter_all:'Alle',no_results:'Keine Projekte gefunden.',
+    lbl_srv:'✦ Was ich anbiete',srv_title:'Meine',srv_em:'Dienstleistungen',add_srv:'+ Dienst',
+    lbl_testi:'✦ Kundenstimmen',testi_title:'Was',testi_em:'Kunden sagen',add_testi:'+ Bewertung',
+    lbl_contact:'✦ Kontakt',contact_title:'Lass uns',contact_em:'reden',
+    contact_desc:'Hast du ein Projekt? Ich antworte innerhalb von 24 Stunden.',
+    lbl_fn:'Vorname',lbl_ln:'Nachname',lbl_em:'E-Mail *',lbl_su:'Betreff',lbl_msg:'Nachricht *',
+    form_send:'Nachricht senden →',form_thanks:'Vielen Dank!',form_thanks_sub:'Ich melde mich bald!',
+    footer_copy:'© 2026 — Mit ❤️ gebaut',
+    edit_btn:'Bearbeiten',edit_done:'Fertig',
+    edit_banner:'✏️ Bearbeitungsmodus — Text anklicken · Karten verwalten',
+    cancel:'Abbrechen',save:'Speichern',
+    new_proj:'Neues Projekt',edit_proj:'Projekt bearbeiten',new_srv:'Neuer Dienst',edit_srv:'Dienst bearbeiten',
+    new_testi:'Neue Bewertung',edit_testi:'Bewertung bearbeiten',
+    f_name:'Name *',f_cat:'Kategorie',f_desc:'Beschreibung *',f_link:'Link (optional)',f_icon:'Symbol',f_tags:'Stichworte',
+    f_author:'Kundenname *',f_role:'Position',f_text:'Bewertungstext *',f_stars:'Sterne (1-5)',f_emoji:'Emoji',
+    empty_proj:'Noch keine Projekte.',empty_srv:'Noch keine Dienste.',empty_testi:'Noch keine Bewertungen.',
+    view:'Ansehen →',soon:'Bald →',visit:'Website öffnen',
+    cookie_txt:'🍪 Diese Website verwendet Cookies.',cookie_decline:'Ablehnen',cookie_accept:'Akzeptieren',
+    chat_greeting:'👋 Hallo! Wie kann ich dir helfen?',chat_name:'Dein Name',chat_email:'E-Mail',
+    chat_msg:'Deine Nachricht...',chat_send:'Senden →',chat_sent:'Nachricht gesendet!',
+    confirm_del:'Wirklich löschen?',alert_fill:'Pflichtfelder ausfüllen.',
+    stat_val:'Zahl',stat_suf:'Suffix (z.B. +)',
+    pdf_btn:'PDF Export',qr_desc:'Scanne den Code um diese Website zu öffnen.',
+    qr_close:'Schließen',qr_dl:'📥 Download',
+    lbl_color:'Akzentfarbe',lbl_font:'Schriftart',lbl_bg:'Hintergrund',lbl_data:'Daten',
+    sm_title:'⚙️ Sektionen verwalten',sm_builtin:'Standard-Sektionen',sm_custom:'Eigene Sektionen',sm_add:'+ Neue Sektion',
+    sm_new_name:'Sektions-Titel:',sm_new_icon:'Symbol (Emoji):',sm_new_content:'Inhalt:',
+    sec_ueber:'Über mich',sec_cv:'Lebenslauf',sec_proj:'Projekte',sec_srv:'Dienste',sec_testi:'Bewertungen',sec_contact:'Kontakt',
+    pw_new_title:'Passwort erstellen',pw_check_title:'Passwort erforderlich',
+    pw_new_sub:'Wähle ein Passwort für den Bearbeitungsmodus.',pw_check_sub:'Gib dein Bearbeitungs-Passwort ein.',
+    pw_hint:'⚠️ Gut merken — Zurücksetzen löscht alle Daten.',
+    pw_set:'Passwort festlegen',pw_confirm:'Bestätigen',pw_wrong:'❌ Falsches Passwort.',pw_short:'Mindestens 4 Zeichen.',
+    pw_changed:'✅ Passwort wurde geändert!',
+    exp_step1:'Daten werden gesammelt...',exp_step2:'Projekte & Dienste einbetten...',exp_step3:'Bilder verarbeiten...',exp_step4:'Datei generieren...',exp_done:'✅ Export fertig!',
+    exp_prog:'📦 Export läuft...',
+    exp_success:'✅ index.html wurde heruntergeladen!\n\n📂 Lade sie in dein GitHub Repository hoch.\n🌐 Aktiviere GitHub Pages unter Settings → Pages.\n\n🔑 Auf der Website bearbeiten: Strg+Shift+E drücken.',
+    splash_sub:'Web Development & Design',
+  },
+  en:{
+    nav_about:'About',nav_cv:'Resume',nav_proj:'Projects',nav_srv:'Services',nav_testi:'Reviews',nav_contact:'Contact',
+    hero_badge:'Available for new projects',hero_h1:'I build',hero_em:'digital experiences',
+    hero_sub:'High-quality websites and digital services — sharp in concept, precise in execution.',
+    cta1:'View Projects',cta2:'Get in Touch',scroll:'Scroll',
+    lbl_about:'✦ About Me',edit_hint:'💡 Click text to edit',upload_photo:'📷 Photo',
+    stat0:'Projects',stat1:'Clients',stat2:'Years',stat3:'Remote',
+    lbl_cv:'✦ Resume',cv_title:'My',cv_em:'Journey',cv_exp:'💼 Experience',cv_edu:'🎓 Education',
+    add_exp:'+ Experience',add_edu:'+ Education',
+    lbl_proj:'✦ My Work',proj_title:'Selected',proj_em:'Projects',add_proj:'+ Project',
+    search_ph:'Search projects...',filter_all:'All',no_results:'No projects found.',
+    lbl_srv:'✦ What I Offer',srv_title:'My',srv_em:'Services',add_srv:'+ Service',
+    lbl_testi:'✦ Client Reviews',testi_title:'What',testi_em:'Clients Say',add_testi:'+ Review',
+    lbl_contact:'✦ Contact',contact_title:"Let's",contact_em:'Talk',
+    contact_desc:"Have a project? I respond within 24 hours.",
+    lbl_fn:'First Name',lbl_ln:'Last Name',lbl_em:'Email *',lbl_su:'Subject',lbl_msg:'Message *',
+    form_send:'Send Message →',form_thanks:'Thank You!',form_thanks_sub:"I'll get back to you soon!",
+    footer_copy:'© 2026 — Built with ❤️',
+    edit_btn:'Edit',edit_done:'Done',
+    edit_banner:'✏️ Edit Mode — Click text · Manage cards',
+    cancel:'Cancel',save:'Save',
+    new_proj:'New Project',edit_proj:'Edit Project',new_srv:'New Service',edit_srv:'Edit Service',
+    new_testi:'New Review',edit_testi:'Edit Review',
+    f_name:'Name *',f_cat:'Category',f_desc:'Description *',f_link:'Link (optional)',f_icon:'Icon',f_tags:'Tags',
+    f_author:'Client Name *',f_role:'Role',f_text:'Review Text *',f_stars:'Stars (1-5)',f_emoji:'Emoji',
+    empty_proj:'No projects yet.',empty_srv:'No services yet.',empty_testi:'No reviews yet.',
+    view:'View →',soon:'Soon →',visit:'Open Website',
+    cookie_txt:'🍪 This website uses cookies.',cookie_decline:'Decline',cookie_accept:'Accept',
+    chat_greeting:"👋 Hello! How can I help you?",chat_name:'Your Name',chat_email:'Email',
+    chat_msg:'Your message...',chat_send:'Send →',chat_sent:'Message sent!',
+    confirm_del:'Really delete?',alert_fill:'Please fill required fields.',
+    stat_val:'Number',stat_suf:'Suffix (e.g. +)',
+    pdf_btn:'PDF Export',qr_desc:'Scan the code to open this website.',
+    qr_close:'Close',qr_dl:'📥 Download',
+    lbl_color:'Accent Color',lbl_font:'Font',lbl_bg:'Background',lbl_data:'Data',
+    sm_title:'⚙️ Manage Sections',sm_builtin:'Default Sections',sm_custom:'Custom Sections',sm_add:'+ New Section',
+    sm_new_name:'Section Title:',sm_new_icon:'Icon (Emoji):',sm_new_content:'Content:',
+    sec_ueber:'About Me',sec_cv:'Resume',sec_proj:'Projects',sec_srv:'Services',sec_testi:'Reviews',sec_contact:'Contact',
+    pw_new_title:'Create Password',pw_check_title:'Password Required',
+    pw_new_sub:'Set a password to protect edit mode.',pw_check_sub:'Enter your edit password.',
+    pw_hint:'⚠️ Remember it — reset deletes all data.',
+    pw_set:'Set Password',pw_confirm:'Confirm',pw_wrong:'❌ Wrong password.',pw_short:'At least 4 characters.',
+    pw_changed:'✅ Password changed!',
+    exp_step1:'Collecting data...',exp_step2:'Embedding projects & services...',exp_step3:'Processing images...',exp_step4:'Generating file...',exp_done:'✅ Export complete!',
+    exp_prog:'📦 Exporting...',
+    exp_success:'✅ index.html downloaded!\n\n📂 Upload it to your GitHub Repository.\n🌐 Enable GitHub Pages under Settings → Pages.\n\n🔑 To edit on live site: Press Ctrl+Shift+E.',
+    splash_sub:'Web Development & Design',
+  },
+  ar:{
+    nav_about:'عني',nav_cv:'السيرة',nav_proj:'المشاريع',nav_srv:'الخدمات',nav_testi:'التقييمات',nav_contact:'التواصل',
+    hero_badge:'متاح لمشاريع جديدة',hero_h1:'أبني',hero_em:'تجارب رقمية راقية',
+    hero_sub:'مواقع ويب وخدمات رقمية عالية الجودة — حادة في الفكرة، دقيقة في التنفيذ.',
+    cta1:'استعرض المشاريع',cta2:'تواصل معي',scroll:'مرر',
+    lbl_about:'✦ عني',edit_hint:'💡 انقر النص لتعديله',upload_photo:'📷 صورة',
+    stat0:'مشروع',stat1:'عميل',stat2:'سنة',stat3:'عن بُعد',
+    lbl_cv:'✦ السيرة الذاتية',cv_title:'',cv_em:'مسيرتي المهنية',cv_exp:'💼 الخبرة',cv_edu:'🎓 التعليم',
+    add_exp:'+ خبرة',add_edu:'+ مؤهل',
+    lbl_proj:'✦ أعمالي',proj_title:'مشاريع',proj_em:'مختارة',add_proj:'+ مشروع',
+    search_ph:'ابحث عن مشروع...',filter_all:'الكل',no_results:'لم يتم العثور على مشاريع.',
+    lbl_srv:'✦ ما أقدمه',srv_title:'',srv_em:'خدماتي',add_srv:'+ خدمة',
+    lbl_testi:'✦ آراء العملاء',testi_title:'ماذا',testi_em:'يقول العملاء',add_testi:'+ تقييم',
+    lbl_contact:'✦ التواصل',contact_title:'لنتحدث',contact_em:'معاً',
+    contact_desc:'هل لديك مشروع؟ سأرد خلال 24 ساعة.',
+    lbl_fn:'الاسم الأول',lbl_ln:'اسم العائلة',lbl_em:'البريد *',lbl_su:'الموضوع',lbl_msg:'الرسالة *',
+    form_send:'إرسال ←',form_thanks:'شكراً!',form_thanks_sub:'سأتواصل معك قريباً!',
+    footer_copy:'© 2026 — صُنع بـ ❤️',
+    edit_btn:'تعديل',edit_done:'تم',
+    edit_banner:'✏️ وضع التعديل — انقر النصوص · إدارة البطاقات',
+    cancel:'إلغاء',save:'حفظ',
+    new_proj:'مشروع جديد',edit_proj:'تعديل المشروع',new_srv:'خدمة جديدة',edit_srv:'تعديل الخدمة',
+    new_testi:'تقييم جديد',edit_testi:'تعديل التقييم',
+    f_name:'الاسم *',f_cat:'التصنيف',f_desc:'الوصف *',f_link:'الرابط (اختياري)',f_icon:'الأيقونة',f_tags:'كلمات مفتاحية',
+    f_author:'اسم العميل *',f_role:'المنصب',f_text:'نص التقييم *',f_stars:'نجوم (1-5)',f_emoji:'إيموجي',
+    empty_proj:'لا توجد مشاريع.',empty_srv:'لا توجد خدمات.',empty_testi:'لا توجد تقييمات.',
+    view:'عرض ←',soon:'قريباً ←',visit:'فتح الموقع',
+    cookie_txt:'🍪 يستخدم هذا الموقع ملفات تعريف الارتباط.',cookie_decline:'رفض',cookie_accept:'قبول',
+    chat_greeting:'👋 مرحباً! كيف يمكنني مساعدتك؟',chat_name:'اسمك',chat_email:'البريد الإلكتروني',
+    chat_msg:'رسالتك...',chat_send:'إرسال ←',chat_sent:'تم إرسال الرسالة!',
+    confirm_del:'هل تريد الحذف؟',alert_fill:'يرجى ملء الحقول المطلوبة.',
+    stat_val:'الرقم',stat_suf:'اللاحقة (مثل: +)',
+    pdf_btn:'تصدير PDF',qr_desc:'امسح الرمز لفتح الموقع.',
+    qr_close:'إغلاق',qr_dl:'📥 تنزيل',
+    lbl_color:'لون التمييز',lbl_font:'الخط',lbl_bg:'الخلفية',lbl_data:'البيانات',
+    sm_title:'⚙️ إدارة الأقسام',sm_builtin:'الأقسام الافتراضية',sm_custom:'الأقسام المخصصة',sm_add:'+ قسم جديد',
+    sm_new_name:'عنوان القسم:',sm_new_icon:'الأيقونة (إيموجي):',sm_new_content:'المحتوى:',
+    sec_ueber:'عني',sec_cv:'السيرة الذاتية',sec_proj:'المشاريع',sec_srv:'الخدمات',sec_testi:'التقييمات',sec_contact:'التواصل',
+    pw_new_title:'إنشاء كلمة مرور',pw_check_title:'كلمة المرور مطلوبة',
+    pw_new_sub:'اختر كلمة مرور لحماية وضع التعديل.',pw_check_sub:'أدخل كلمة مرور التعديل.',
+    pw_hint:'⚠️ تذكرها — إعادة الضبط يحذف كل البيانات.',
+    pw_set:'تعيين كلمة المرور',pw_confirm:'تأكيد',pw_wrong:'❌ كلمة مرور خاطئة.',pw_short:'4 أحرف على الأقل.',
+    pw_changed:'✅ تم تغيير كلمة المرور!',
+    exp_step1:'جمع البيانات...',exp_step2:'تضمين المشاريع والخدمات...',exp_step3:'معالجة الصور...',exp_step4:'توليد الملف...',exp_done:'✅ تم التصدير!',
+    exp_prog:'📦 جاري التصدير...',
+    exp_success:'✅ تم تنزيل index.html!\n\n📂 ارفع الملف في مستودع GitHub.\n🌐 فعّل GitHub Pages في الإعدادات.\n\n🔑 للتعديل على الموقع: Ctrl+Shift+E',
+    splash_sub:'تطوير وتصميم المواقع',
+  }
+};
+function t(k){return TX[lang]?.[k]||TX.de[k]||k;}
+
+// ── CONSTANTS ─────────────────────────────────────────────────────────
+const COLORS=[
+  {h:'#c9a84c',r:'201,168,76'},   // Gold (default)
+  {h:'#16a085',r:'22,160,133'},   // Teal/Emerald ← NEU
+  {h:'#8F9790',r:'143,151,144'},  // Sage Grey ← NEU
+  {h:'#4a90d9',r:'74,144,217'},   // Blue
+  {h:'#9b72cf',r:'155,114,207'},  // Purple
+  {h:'#d95a5a',r:'217,90,90'},    // Red
+];
+const FONTS=[{id:'classic',label:'Classic'},{id:'modern',label:'Modern'},{id:'elegant',label:'Elegant'},{id:'arabic',label:'Arabic'}];
+const BGS=[{id:'gradient',label:'Default'},{id:'grid',label:'Grid'},{id:'dots',label:'Dots'},{id:'lines',label:'Lines'},{id:'mesh',label:'Mesh'},{id:'particles',label:'Particles'}];
+
+// Background color themes
+const BG_THEMES=[
+  {id:'dark',    label:'Dark',   vars:{'--bg':'#080808','--bg2':'#111','--bg3':'#1a1a1a','--text':'#f0ede6','--muted':'#888880','--b2':'rgba(255,255,255,.07)','--card':'#111','--cardh':'#1a1a1a','--nav':'rgba(8,8,8,.92)'}},
+  {id:'teal',    label:'Teal',   vars:{'--bg':'#0a1a18','--bg2':'#0f2420','--bg3':'#163028','--text':'#e8f5f3','--muted':'#6fa89e','--b2':'rgba(22,160,133,.15)','--card':'#0f2420','--cardh':'#163028','--nav':'rgba(10,26,24,.92)'}},
+  {id:'sage',    label:'Sage',   vars:{'--bg':'#12171a','--bg2':'#1a2024','--bg3':'#222a2e','--text':'#e4eae8','--muted':'#7a9090','--b2':'rgba(143,151,144,.12)','--card':'#1a2024','--cardh':'#222a2e','--nav':'rgba(18,23,26,.92)'}},
+  {id:'light',   label:'Light',  vars:{'--bg':'#fafaf8','--bg2':'#f0ede5','--bg3':'#e5e1d6','--text':'#1a1a18','--muted':'#6b6b64','--b2':'rgba(0,0,0,.09)','--card':'#f0ede5','--cardh':'#e5e1d6','--nav':'rgba(250,250,248,.93)'}},
+  {id:'teal-lt', label:'Teal Lt',vars:{'--bg':'#f0faf8','--bg2':'#e0f5f0','--bg3':'#c8ede6','--text':'#0a2018','--muted':'#3a7a70','--b2':'rgba(22,160,133,.15)','--card':'#e0f5f0','--cardh':'#c8ede6','--nav':'rgba(240,250,248,.95)'}},
+];
+
+// Project layout
+const PROJ_LAYOUTS=['grid','list','wide'];
+
+const ICONS=['💻','🎨','📱','⚡','🚀','🛠','📊','🔮','✨','🌐','🎯','🔥','📐','🖥','📝','🧩'];
+const BUILTIN_SECS=[
+  {id:'ueber',icon:'👤',key:'sec_ueber'},{id:'cv',icon:'📄',key:'sec_cv'},
+  {id:'projekte',icon:'💼',key:'sec_proj'},{id:'dienste',icon:'🛠',key:'sec_srv'},
+  {id:'testi',icon:'⭐',key:'sec_testi'},{id:'kontakt',icon:'📧',key:'sec_contact'}
+];
+const INLINE_FIELDS=['vorname','nachname','bio','bio2','email','location'];
+
+// ── STATE ─────────────────────────────────────────────────────────────
+let lang=lsS('lang','de');
+let dark=true;
+let editMode=false;
+let activeColor=ls('color',0);
+let activeFont=lsS('font','classic');
+let activeHeroBg=lsS('herobg','gradient');
+let activeBgTheme=lsS('bgtheme','dark');
+let activeProjLayout=lsS('projlayout','grid');
+
+let currentType=null, editIndex=null, activeFilter='all';
+let pwCallback=null;
+let particleAnimId=null;
+let data={projekte:ls('p',[]),dienste:ls('d',[]),testi:ls('ti',[])};
+let skills=ls('skills',['HTML','CSS','JavaScript','React','Figma']);
+let stats=ls('stats',[{v:24,s:'+'},{v:18,s:''},{v:4,s:''}]);
+let socials=ls('socials',[{i:'⬡',l:'GitHub',u:'#'},{i:'in',l:'LinkedIn',u:'#'},{i:'▶',l:'Instagram',u:'#'}]);
+let tlExp=ls('tlExp',[]), tlEdu=ls('tlEdu',[]);
+let hiddenSecs=ls('hiddenSecs',[]);
+let customSecs=ls('customSecs',[]);
+
+// ── HELPERS ───────────────────────────────────────────────────────────
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function el(id){return document.getElementById(id);}
+function setTxt(id,txt){const e=el(id);if(e)e.textContent=txt;}
+function setHTML(id,html){const e=el(id);if(e)e.innerHTML=html;}
+function setAttr(id,attr,val){const e=el(id);if(e)e.setAttribute(attr,val);}
+function safeFocus(id){setTimeout(()=>{const e=el(id);if(e)e.focus();},100);}
+
+// ── LANGUAGE ──────────────────────────────────────────────────────────
+function setLang(l){
+  lang=l; ssS('lang',l);
+  document.documentElement.lang=l;
+  document.documentElement.dir=l==='ar'?'rtl':'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.trim()===({de:'DE',en:'EN',ar:'عر'}[l])));
+  applyAllText();
+  renderAll();
+}
+
+function applyAllText(){
+  // Nav
+  document.querySelectorAll('[data-key]').forEach(el=>{
+    if(el.tagName!=='INPUT'&&el.tagName!=='TEXTAREA') el.textContent=t(el.dataset.key);
+  });
+  // Hero
+  setTxt('hero-badge-text',t('hero_badge'));
+  setTxt('hero-h1',t('hero_h1')); // we manage the em separately
+  const heroH1=el('hero-h1');
+  if(heroH1) heroH1.innerHTML=t('hero_h1')+'<br/><em id="hero-em">'+t('hero_em')+'</em>';
+  setTxt('hero-sub',t('hero_sub'));
+  setTxt('cta1',t('cta1')); setTxt('cta2',t('cta2'));
+  setTxt('scroll-txt',t('scroll'));
+  setTxt('lbl-about',t('lbl_about'));
+  setTxt('edit-hint-txt',t('edit_hint'));
+  // Stats labels
+  setTxt('stat0-lbl',t('stat0')); setTxt('stat1-lbl',t('stat1'));
+  setTxt('stat2-lbl',t('stat2')); setTxt('stat3-lbl',t('stat3'));
+  // CV
+  setTxt('lbl-cv',t('lbl_cv')); setTxt('cv-title',t('cv_title')); setTxt('cv-em',t('cv_em'));
+  setTxt('cv-exp-title',t('cv_exp')); setTxt('cv-edu-title',t('cv_edu'));
+  setTxt('add-exp-btn',t('add_exp')); setTxt('add-edu-btn',t('add_edu'));
+  setTxt('pdf-btn-txt',t('pdf_btn'));
+  // Projekte
+  setTxt('lbl-proj',t('lbl_proj')); setTxt('proj-title',t('proj_title')); setTxt('proj-em',t('proj_em'));
+  setTxt('add-proj-btn','+ '+t('f_name').replace(' *',''));
+  if(el('add-proj-btn')) el('add-proj-btn').textContent=t('add_proj');
+  setAttr('search-input','placeholder',t('search_ph'));
+  // Dienste
+  setTxt('lbl-srv',t('lbl_srv')); setTxt('srv-title',t('srv_title')); setTxt('srv-em',t('srv_em'));
+  if(el('add-srv-btn')) el('add-srv-btn').textContent=t('add_srv');
+  // Testi
+  setTxt('lbl-testi',t('lbl_testi')); setTxt('testi-title',t('testi_title')); setTxt('testi-em',t('testi_em'));
+  if(el('add-testi-btn')) el('add-testi-btn').textContent=t('add_testi');
+  // Contact
+  setTxt('lbl-contact',t('lbl_contact')); setTxt('contact-title',t('contact_title')); setTxt('contact-em',t('contact_em'));
+  setTxt('contact-desc',t('contact_desc'));
+  setTxt('lbl-fn',t('lbl_fn')); setTxt('lbl-ln',t('lbl_ln'));
+  setTxt('lbl-em',t('lbl_em')); setTxt('lbl-su',t('lbl_su')); setTxt('lbl-msg',t('lbl_msg'));
+  setTxt('form-send-btn',t('form_send'));
+  setTxt('form-thanks',t('form_thanks')); setTxt('form-thanks-sub',t('form_thanks_sub'));
+  setTxt('footer-copy',t('footer_copy'));
+  // Cookie
+  setTxt('cookie-txt',t('cookie_txt'));
+  setTxt('cookie-decline-btn',t('cookie_decline')); setTxt('cookie-accept-btn',t('cookie_accept'));
+  // Chat
+  setTxt('chat-greeting',t('chat_greeting'));
+  if(el('chat-name')) el('chat-name').placeholder=t('chat_name');
+  if(el('chat-email-field')) el('chat-email-field').placeholder=t('chat_email');
+  if(el('chat-msg-field')) el('chat-msg-field').placeholder=t('chat_msg');
+  setTxt('chat-send-btn',t('chat_send')); setTxt('chat-sent-txt',t('chat_sent'));
+  // QR
+  setTxt('qr-desc',t('qr_desc')); setTxt('qr-close-btn',t('qr_close')); setTxt('qr-dl-btn',t('qr_dl'));
+  // Edit
+  setTxt('edit-label',editMode?t('edit_done'):t('edit_btn'));
+  if(el('edit-banner')) el('edit-banner').textContent=t('edit_banner');
+  // Panels labels
+  setTxt('lbl-color',t('lbl_color')); setTxt('lbl-font',t('lbl_font'));
+  setTxt('lbl-bg',t('lbl_bg')); setTxt('lbl-data',t('lbl_data'));
+  // Section manager
+  setTxt('sm-title',t('sm_title')); setTxt('sm-builtin-lbl',t('sm_builtin'));
+  setTxt('sm-custom-lbl',t('sm_custom')); setTxt('add-sec-btn',t('sm_add'));
+  // Splash
+  setTxt('splash-sub',t('splash_sub'));
+}
+
+// ── COLOR ─────────────────────────────────────────────────────────────
+function applyColor(i,save=true){
+  activeColor=i;
+  const c=COLORS[i];
+  const r=document.documentElement;
+  r.style.setProperty('--gold',c.h);
+  r.style.setProperty('--gold2',brighten(c.h,28));
+  r.style.setProperty('--gr',c.r);
+  r.style.setProperty('--border','rgba('+c.r+',.22)');
+  if(save)ss('color',i);
+  document.querySelectorAll('.swatch').forEach((s,j)=>s.classList.toggle('active',j===i));
+}
+function brighten(hex,p){return'#'+[1,3,5].map(i=>Math.min(255,parseInt(hex.slice(i,i+2),16)+p).toString(16).padStart(2,'0')).join('');}
+function buildColorSwatches(){
+  setHTML('color-swatches',COLORS.map((c,i)=>`<div class="swatch${i===activeColor?' active':''}" style="background:${c.h}" onclick="applyColor(${i})" title="Farbe ${i+1}"></div>`).join(''));
+}
+function buildFontSwatches(){
+  setHTML('font-swatches',FONTS.map(f=>`<div class="font-pill${f.id===activeFont?' active':''}" onclick="applyFont('${f.id}')">${f.label}</div>`).join(''));
+}
+function buildBgSwatches(){
+  setHTML('bg-swatches',BGS.map(b=>`<div class="bg-pill${b.id===activeHeroBg?' active':''}" onclick="applyHeroBg('${b.id}')">${b.label}</div>`).join(''));
+}
+function applyFont(id,save=true){
+  activeFont=id;
+  document.documentElement.setAttribute('data-font',id);
+  if(save)ssS('font',id);
+  document.querySelectorAll('.font-pill').forEach(p=>p.classList.toggle('active',p.textContent===FONTS.find(f=>f.id===id)?.label));
+}
+function applyHeroBg(id,save=true){
+  activeHeroBg=id;
+  document.documentElement.setAttribute('data-herobg',id);
+  if(save)ssS('herobg',id);
+  document.querySelectorAll('.bg-pill').forEach(p=>p.classList.toggle('active',p.textContent===BGS.find(b=>b.id===id)?.label));
+  const canvas=el('hero-canvas');
+  if(id==='particles'){
+    if(canvas){canvas.style.display='block';startParticles();}
+  } else {
+    if(canvas)canvas.style.display='none';
+    if(particleAnimId){cancelAnimationFrame(particleAnimId);particleAnimId=null;}
+  }
+}
+
+// ── BG THEME ──────────────────────────────────────────────────────────
+function applyBgTheme(id,save=true){
+  activeBgTheme=id;
+  const theme=BG_THEMES.find(t=>t.id===id)||BG_THEMES[0];
+  const r=document.documentElement;
+  Object.entries(theme.vars).forEach(([k,v])=>r.style.setProperty(k,v));
+  // sync dark/light state for theme button
+  dark=!['light','teal-lt'].includes(id);
+  setTxt('theme-btn',dark?'🌙':'☀️');
+  if(save)ssS('bgtheme',id);
+  document.querySelectorAll('.bg-theme-pill').forEach(p=>p.classList.toggle('active',p.dataset.theme===id));
+}
+function buildBgThemePills(){
+  const c=document.getElementById('bg-theme-pills');if(!c)return;
+  c.innerHTML=BG_THEMES.map(b=>`<span class="bg-theme-pill${b.id===activeBgTheme?' active':''}" data-theme="${b.id}" onclick="applyBgTheme('${b.id}')">${b.label}</span>`).join('');
+}
+
+// ── PROJECT LAYOUT ─────────────────────────────────────────────────────
+function setProjLayout(layout,save=true){
+  activeProjLayout=layout;
+  document.documentElement.setAttribute('data-projlayout',layout);
+  if(save)ssS('projlayout',layout);
+  ['grid','list','wide'].forEach(l=>{
+    const btn=document.getElementById('layout-'+l+'-btn');
+    if(btn)btn.classList.toggle('active',l===layout);
+  });
+  renderProjekte();
+}
+function buildLayoutBtns(){
+  ['grid','list','wide'].forEach(l=>{
+    const btn=document.getElementById('layout-'+l+'-btn');
+    if(btn)btn.classList.toggle('active',l===activeProjLayout);
+  });
+  document.documentElement.setAttribute('data-projlayout',activeProjLayout);
+}
+
+
+function startParticles(){
+  if(particleAnimId)cancelAnimationFrame(particleAnimId);
+  const canvas=el('hero-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,pts=[];
+  const resize=()=>{W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;};
+  resize();
+  window.addEventListener('resize',resize,{passive:true});
+  for(let i=0;i<55;i++)pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.5,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const gold=getComputedStyle(document.documentElement).getPropertyValue('--gold').trim()||'#c9a84c';
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=gold+'55';ctx.fill();
+    });
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<100){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
+        ctx.strokeStyle=gold+Math.round((1-d/100)*35).toString(16).padStart(2,'0');ctx.lineWidth=.5;ctx.stroke();}
+    }
+    particleAnimId=requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ── THEME ─────────────────────────────────────────────────────────────
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'light');
+  setTxt('theme-btn',dark?'🌙':'☀️');
+}
+function togglePanels(){el('pf-panels').classList.toggle('open');}
+
+// ── EDIT MODE & PASSWORD ───────────────────────────────────────────────
+function hashPw(pw){let h=0;for(const c of pw){h=((h<<5)-h)+c.charCodeAt(0);h|=0;}return h.toString(36);}
+function isPwSet(){return!!localStorage.getItem(K+'pw');}
+function isPwActive(){return sessionStorage.getItem(K+'pws')==='1';}
+
+function handleEditToggle(){
+  if(!editMode){
+    requirePw(()=>{ activateEdit(); });
+  } else {
+    deactivateEdit();
+  }
+}
+function requirePw(cb){
+  if(isPwActive()){cb();return;}
+  pwCallback=cb;
+  const isFirst=!isPwSet();
+  setTxt('pw-title',isFirst?t('pw_new_title'):t('pw_check_title'));
+  setTxt('pw-sub',isFirst?t('pw_new_sub'):t('pw_check_sub'));
+  setTxt('pw-hint',isFirst?t('pw_hint'):'');
+  setTxt('pw-ok-btn',isFirst?t('pw_set'):t('pw_confirm'));
+  setTxt('pw-cancel-btn',t('cancel'));
+  setTxt('pw-error','');
+  if(el('pw-input'))el('pw-input').value='';
+  el('pw-overlay').classList.add('open');
+  safeFocus('pw-input');
+}
+function submitPw(){
+  const val=(el('pw-input')?.value||'').trim();
+  if(val.length<4){setTxt('pw-error',t('pw_short'));return;}
+  if(!isPwSet()){
+    localStorage.setItem(K+'pw',hashPw(val));
+    sessionStorage.setItem(K+'pws','1');
+    closePwModal();
+    if(pwCallback){pwCallback();pwCallback=null;}
+  } else {
+    if(hashPw(val)===localStorage.getItem(K+'pw')){
+      sessionStorage.setItem(K+'pws','1');
+      setTxt('pw-error','');
+      closePwModal();
+      if(pwCallback){pwCallback();pwCallback=null;}
+    } else {
+      setTxt('pw-error',t('pw_wrong'));
+      if(el('pw-input'))el('pw-input').value='';
+      safeFocus('pw-input');
+    }
+  }
+}
+function closePwModal(){el('pw-overlay').classList.remove('open');pwCallback=null;}
+function changePw(){
+  localStorage.removeItem(K+'pw');sessionStorage.removeItem(K+'pws');
+  requirePw(()=>alert(t('pw_changed')));
+}
+function activateEdit(){
+  editMode=true;
+  document.body.classList.add('edit-mode');
+  setTxt('edit-label',t('edit_done'));
+  el('edit-toggle').classList.add('active');
+  if(el('edit-banner'))el('edit-banner').style.display='block';
+  if(el('sec-mgr-btn'))el('sec-mgr-btn').style.display='flex';
+}
+function deactivateEdit(){
+  editMode=false;
+  document.body.classList.remove('edit-mode');
+  setTxt('edit-label',t('edit_btn'));
+  el('edit-toggle').classList.remove('active');
+  if(el('edit-banner'))el('edit-banner').style.display='none';
+  if(el('sec-mgr-btn'))el('sec-mgr-btn').style.display='none';
+  saveInlineFields();
+}
+
+// ── INLINE FIELDS ─────────────────────────────────────────────────────
+function restoreInlineFields(){
+  INLINE_FIELDS.forEach(f=>{
+    const e=el('f-'+f);
+    if(e){const v=lsS('if_'+f);if(v)e.textContent=v;}
+  });
+}
+function saveInlineFields(){
+  INLINE_FIELDS.forEach(f=>{
+    const e=el('f-'+f);
+    if(e)ssS('if_'+f,e.textContent);
+  });
+}
+
+// ── AVATAR ────────────────────────────────────────────────────────────
+function loadAvatar(e){
+  const file=e.target.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=ev=>{ssS('avatar',ev.target.result);showAvatar(ev.target.result);};
+  r.readAsDataURL(file);
+}
+function restoreAvatar(){const s=lsS('avatar');if(s)showAvatar(s);}
+function showAvatar(src){
+  const img=el('avatar-img');const ph=el('avatar-ph');
+  if(img){img.src=src;img.classList.add('loaded');}
+  if(ph)ph.style.display='none';
+}
+
+// ── SKILLS ────────────────────────────────────────────────────────────
+function renderSkills(){
+  const w=el('skills-wrap');if(!w)return;
+  w.innerHTML=skills.map((s,i)=>`<span class="skill-pill">${esc(s)}<button class="skill-del" onclick="delSkill(${i})">×</button></span>`).join('')
+    +`<button class="btn-add-skill" onclick="addSkill()">+</button>`;
+}
+function addSkill(){const n=prompt(lang==='ar'?'مهارة جديدة:':'Neuer Skill:','');if(n?.trim()){skills.push(n.trim());ss('skills',skills);renderSkills();}}
+function delSkill(i){skills.splice(i,1);ss('skills',skills);renderSkills();}
+
+// ── STATS ─────────────────────────────────────────────────────────────
+function editStat(i){
+  const s=stats[i];
+  const v=prompt(t('stat_val')+':',s.v);if(v===null)return;
+  const sf=prompt(t('stat_suf')+':',s.s||'');
+  stats[i]={v:parseInt(v)||0,s:sf||''};
+  ss('stats',stats);animateStat(i);
+}
+function animateStat(i){
+  const e=el('stat'+i);if(!e)return;
+  const tgt=stats[i].v,suf=stats[i].s||'';
+  let cur=0;const step=Math.max(1,tgt/60);
+  const tm=setInterval(()=>{cur=Math.min(cur+step,tgt);e.textContent=Math.round(cur)+suf;if(cur>=tgt)clearInterval(tm);},25);
+}
+let counted=false;
+function setupCounters(){
+  const row=el('stats-row');if(!row)return;
+  new IntersectionObserver(es=>{
+    if(es[0].isIntersecting&&!counted){counted=true;[0,1,2].forEach(i=>animateStat(i));}
+  },{threshold:.4}).observe(row);
+}
+
+// ── TIMELINE ──────────────────────────────────────────────────────────
+function renderTl(type){
+  const arr=type==='exp'?tlExp:tlEdu;
+  const e=el('tl-'+type);if(!e)return;
+  if(!arr.length){e.innerHTML=`<p style="color:var(--muted);font-size:13px;opacity:.5">–</p>`;return;}
+  e.innerHTML=arr.map((item,i)=>`<div class="tl-item" style="position:relative">
+    <button class="tl-del-btn" onclick="delTl('${type}',${i})">✕</button>
+    <div class="tl-dot"></div>
+    <div class="tl-year">${esc(item.year)}</div>
+    <div class="tl-title">${esc(item.title)}</div>
+    <div class="tl-company">${esc(item.company)}</div>
+    <div class="tl-desc">${esc(item.desc)}</div>
+  </div>`).join('');
+}
+function addTl(type){
+  const year=prompt('Jahr:','2024');if(!year)return;
+  const title=prompt('Titel:','');if(!title)return;
+  const company=prompt('Firma:','');
+  const desc=prompt('Beschreibung:','');
+  const arr=type==='exp'?tlExp:tlEdu;
+  arr.unshift({year,title,company:company||'',desc:desc||''});
+  if(type==='exp')ss('tlExp',tlExp);else ss('tlEdu',tlEdu);
+  renderTl(type);
+}
+function delTl(type,i){
+  if(!confirm(t('confirm_del')))return;
+  const arr=type==='exp'?tlExp:tlEdu;arr.splice(i,1);
+  if(type==='exp')ss('tlExp',tlExp);else ss('tlEdu',tlEdu);
+  renderTl(type);
+}
+
+// ── SEARCH & FILTER ───────────────────────────────────────────────────
+function buildFilterBtns(){
+  const cats=new Set();
+  data.projekte.forEach(p=>(p.tag||'').split(',').forEach(c=>{if(c.trim())cats.add(c.trim());}));
+  const fb=el('filter-btns');if(!fb)return;
+  fb.innerHTML=`<button class="filter-btn${activeFilter==='all'?' active':''}" onclick="setFilter('all')">${t('filter_all')}</button>`
+    +[...cats].map(c=>`<button class="filter-btn${activeFilter===c?' active':''}" onclick="setFilter('${esc(c)}')">${esc(c)}</button>`).join('');
+}
+function setFilter(cat){activeFilter=cat;buildFilterBtns();filterProjects();}
+function filterProjects(){
+  const q=(el('search-input')?.value||'').toLowerCase();
+  let any=false;
+  document.querySelectorAll('.project-card[data-idx]').forEach(card=>{
+    const i=parseInt(card.dataset.idx),p=data.projekte[i];if(!p)return;
+    const mq=!q||p.name.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q)||(p.tag||'').toLowerCase().includes(q);
+    const mf=activeFilter==='all'||(p.tag||'').split(',').map(x=>x.trim()).includes(activeFilter);
+    card.classList.toggle('hidden',!(mq&&mf));
+    if(mq&&mf)any=true;
+  });
+  const nr=el('no-results');if(nr)nr.style.display=any?'none':'block';
+}
+
+// ── RENDER CARDS ──────────────────────────────────────────────────────
+function renderProjekte(){
+  const g=el('projekte-grid');if(!g)return;
+  if(!data.projekte.length){g.innerHTML=`<div class="empty-state"><span>📁</span>${t('empty_proj')}</div>`;buildFilterBtns();return;}
+  const isWide=activeProjLayout==='wide';
+  g.innerHTML=data.projekte.map((p,i)=>{
+    const linkBtn=p.url
+      ?`<a href="${esc(p.url)}" target="_blank" class="proj-visit-link" onclick="event.stopPropagation()">${t('visit')} →</a>`
+      :`<span class="proj-no-link">${t('soon')}</span>`;
+    if(isWide){
+      return`<div class="project-card" data-idx="${i}" onclick="if(!document.body.classList.contains('edit-mode'))openLightbox(${i})">
+        <div class="card-controls"><button class="btn-ec" onclick="event.stopPropagation();openModal('projekt',${i})">✏️</button><button class="btn-dc" onclick="event.stopPropagation();delItem('projekt',${i})">✕</button></div>
+        <div class="card-left">
+          <div class="card-num">0${i+1}</div>
+          <div class="card-tag">${esc((p.tag||'').split(',')[0].trim())}</div>
+          ${linkBtn}
+        </div>
+        <div>
+          <h3>${esc(p.name)}</h3>
+          <p style="margin-top:.5rem">${esc(p.desc)}</p>
+        </div>
+      </div>`;
+    }
+    return`<div class="project-card" data-idx="${i}" onclick="if(!document.body.classList.contains('edit-mode'))openLightbox(${i})">
+      <div class="card-controls"><button class="btn-ec" onclick="event.stopPropagation();openModal('projekt',${i})">✏️</button><button class="btn-dc" onclick="event.stopPropagation();delItem('projekt',${i})">✕</button></div>
+      <div class="card-num">0${i+1}</div>
+      <div class="card-tag">${esc((p.tag||'').split(',')[0].trim())}</div>
+      <h3>${esc(p.name)}</h3>
+      <p>${esc(p.desc)}</p>
+      ${linkBtn}
+    </div>`;
+  }).join('')+`<div id="no-results" style="display:none;padding:2rem;text-align:center;color:var(--muted);grid-column:1/-1;font-size:14px">${t('no_results')}</div>`;
+  buildFilterBtns();
+}
+function renderDienste(){
+  const g=el('dienste-grid');if(!g)return;
+  if(!data.dienste.length){g.innerHTML=`<div class="empty-state"><span>🛠</span>${t('empty_srv')}</div>`;return;}
+  g.innerHTML=data.dienste.map((d,i)=>`<div class="service-card">
+    <div class="card-controls"><button class="btn-ec" onclick="openModal('dienst',${i})">✏️</button><button class="btn-dc" onclick="delItem('dienst',${i})">✕</button></div>
+    <div class="service-icon">${d.icon||'💻'}</div><h3>${esc(d.name)}</h3><p>${esc(d.desc)}</p>
+    ${d.tag?`<div class="service-tag">${esc(d.tag)}</div>`:''}
+  </div>`).join('');
+}
+function renderTesti(){
+  const g=el('testi-grid');if(!g)return;
+  if(!data.testi.length){g.innerHTML=`<div class="empty-state"><span>⭐</span>${t('empty_testi')}</div>`;return;}
+  g.innerHTML=data.testi.map((ti,i)=>`<div class="testi-card">
+    <div class="card-controls"><button class="btn-ec" onclick="openModal('testi',${i})">✏️</button><button class="btn-dc" onclick="delItem('testi',${i})">✕</button></div>
+    <div class="testi-stars">${'★'.repeat(Math.min(5,Math.max(1,ti.stars||5)))}</div>
+    <p class="testi-text">${esc(ti.text)}</p>
+    <div class="testi-author"><div class="testi-avatar">${ti.emoji||'😊'}</div><div><div class="testi-name">${esc(ti.author)}</div>${ti.role?`<div class="testi-role">${esc(ti.role)}</div>`:''}</div></div>
+  </div>`).join('');
+}
+
+// ── LIGHTBOX ──────────────────────────────────────────────────────────
+function openLightbox(i){
+  const p=data.projekte[i];if(!p)return;
+  setTxt('lb-tag',p.tag||''); setTxt('lb-title',p.name); setTxt('lb-desc',p.desc);
+  setHTML('lb-img',p.img?`<img src="${esc(p.img)}" alt=""/>`:'🖼️');
+  setHTML('lb-actions',`<button class="btn-outline" onclick="closeLightbox()">${t('cancel')}</button>`
+    +(p.url?`<a href="${esc(p.url)}" target="_blank" class="btn-gold" style="text-decoration:none">${t('visit')}</a>`:''));
+  el('lightbox').classList.add('open');
+}
+function closeLightbox(){el('lightbox').classList.remove('open');}
+
+// ── SOCIALS ───────────────────────────────────────────────────────────
+function renderSocials(){
+  const row=el('social-row');if(!row)return;
+  row.innerHTML=socials.map((s,i)=>`<a href="${esc(s.u)}" class="social-btn" target="_blank">${esc(s.i)} ${esc(s.l)}<span class="soc-edit" onclick="editSocial(${i});event.preventDefault()">✏️</span></a>`).join('');
+}
+function editSocial(i){
+  const s=socials[i];
+  const l=prompt('Label:',s.l);if(l===null)return;
+  const u=prompt('URL:',s.u);if(u===null)return;
+  const ic=prompt('Icon:',s.i)||s.i;
+  socials[i]={i:ic,l:l||s.l,u:u||s.u};ss('socials',socials);renderSocials();
+}
+
+// ── MODAL ─────────────────────────────────────────────────────────────
+function openModal(type,index=null){
+  currentType=type;editIndex=index;
+  const arr=type==='projekt'?data.projekte:type==='dienst'?data.dienste:data.testi;
+  const item=index!==null?arr[index]:null;
+  const titles={projekt:[t('new_proj'),t('edit_proj')],dienst:[t('new_srv'),t('edit_srv')],testi:[t('new_testi'),t('edit_testi')]};
+  setTxt('modal-title',titles[type][index!==null?1:0]);
+  setTxt('modal-cancel-btn',t('cancel')); setTxt('modal-save-btn',t('save'));
+  const f=el('modal-fields');if(!f)return;
+  if(type==='projekt'){
+    f.innerHTML=`
+      <div class="mfield"><label>${t('f_name')}</label><input id="f-name" value="${item?esc(item.name):''}"/></div>
+      <div class="mfield"><label>${t('f_cat')}</label><input id="f-tag" value="${item?esc(item.tag||''):''}"/></div>
+      <div class="mfield"><label>${t('f_desc')}</label><textarea id="f-desc">${item?esc(item.desc):''}</textarea></div>
+      <div class="mfield"><label>${t('f_link')}</label><input id="f-url" type="url" value="${item?esc(item.url||''):''}"/></div>`;
+  } else if(type==='dienst'){
+    f.innerHTML=`
+      <div class="mfield"><label>${t('f_icon')}</label><select id="f-icon">${ICONS.map(ic=>`<option${item?.icon===ic?' selected':''}>${ic}</option>`).join('')}</select></div>
+      <div class="mfield"><label>${t('f_name')}</label><input id="f-name" value="${item?esc(item.name):''}"/></div>
+      <div class="mfield"><label>${t('f_desc')}</label><textarea id="f-desc">${item?esc(item.desc):''}</textarea></div>
+      <div class="mfield"><label>${t('f_tags')}</label><input id="f-tag" value="${item?esc(item.tag||''):''}"/></div>`;
+  } else {
+    f.innerHTML=`
+      <div class="mfield"><label>${t('f_author')}</label><input id="f-author" value="${item?esc(item.author):''}"/></div>
+      <div class="mfield"><label>${t('f_role')}</label><input id="f-role" value="${item?esc(item.role||''):''}"/></div>
+      <div class="mfield"><label>${t('f_text')}</label><textarea id="f-text">${item?esc(item.text):''}</textarea></div>
+      <div class="mfield"><label>${t('f_stars')}</label><input id="f-stars" type="number" min="1" max="5" value="${item?.stars||5}"/></div>
+      <div class="mfield"><label>${t('f_emoji')}</label><input id="f-emoji" value="${item?esc(item.emoji||'😊'):'😊'}"/></div>`;
+  }
+  el('modal').classList.add('open');
+  safeFocus('f-name');if(type==='testi')safeFocus('f-author');
+}
+function closeModal(){el('modal').classList.remove('open');currentType=null;editIndex=null;}
+function saveItem(){
+  if(currentType==='testi'){
+    const author=(el('f-author')?.value||'').trim();
+    const text=(el('f-text')?.value||'').trim();
+    if(!author||!text){alert(t('alert_fill'));return;}
+    const item={author,text,role:(el('f-role')?.value||'').trim(),stars:parseInt(el('f-stars')?.value)||5,emoji:el('f-emoji')?.value||'😊'};
+    if(editIndex!==null)data.testi[editIndex]=item;else data.testi.push(item);
+    ss('ti',data.testi);renderTesti();
+  } else {
+    const name=(el('f-name')?.value||'').trim();
+    const desc=(el('f-desc')?.value||'').trim();
+    if(!name||!desc){alert(t('alert_fill'));return;}
+    if(currentType==='projekt'){
+      const item={name,desc,tag:(el('f-tag')?.value||'').trim(),url:(el('f-url')?.value||'').trim()};
+      if(editIndex!==null)data.projekte[editIndex]=item;else data.projekte.push(item);
+      ss('p',data.projekte);renderProjekte();
+    } else {
+      const item={name,desc,icon:el('f-icon')?.value||'💻',tag:(el('f-tag')?.value||'').trim()};
+      if(editIndex!==null)data.dienste[editIndex]=item;else data.dienste.push(item);
+      ss('d',data.dienste);renderDienste();
+    }
+  }
+  closeModal();
+}
+function delItem(type,i){
+  if(!confirm(t('confirm_del')))return;
+  if(type==='projekt'){data.projekte.splice(i,1);ss('p',data.projekte);renderProjekte();}
+  else if(type==='dienst'){data.dienste.splice(i,1);ss('d',data.dienste);renderDienste();}
+  else{data.testi.splice(i,1);ss('ti',data.testi);renderTesti();}
+}
+
+// ── SECTION MANAGER ───────────────────────────────────────────────────
+function openSecMgr(){renderSecMgr();el('sec-mgr').classList.add('open');el('sec-backdrop').classList.add('open');}
+function closeSecMgr(){el('sec-mgr').classList.remove('open');el('sec-backdrop').classList.remove('open');}
+function renderSecMgr(){
+  const bl=el('builtin-list');const cl=el('custom-list');if(!bl||!cl)return;
+  bl.innerHTML=BUILTIN_SECS.map(s=>{
+    const hidden=hiddenSecs.includes(s.id);
+    return`<div class="sec-row"><div class="sec-icon">${s.icon}</div>
+      <div class="sec-name${hidden?' off':''}">${t(s.key)}</div>
+      <label class="toggle"><input type="checkbox" ${hidden?'':'checked'} onchange="toggleBuiltinSec('${s.id}',this.checked)"/><span class="tog-sl"></span></label>
+    </div>`;
+  }).join('');
+  cl.innerHTML=!customSecs.length
+    ?`<p style="color:var(--muted);font-size:13px;opacity:.6;padding:.5rem 0">–</p>`
+    :customSecs.map((s,i)=>`<div class="sec-row"><div class="sec-icon">${s.icon||'📝'}</div>
+      <div class="sec-name${s.hidden?' off':''}">${esc(s.title)}</div>
+      <div class="sec-acts">
+        <label class="toggle"><input type="checkbox" ${s.hidden?'':'checked'} onchange="toggleCustomSec(${i},this.checked)"/><span class="tog-sl"></span></label>
+        <button class="sec-act edit" onclick="editCustomSec(${i})">✏️</button>
+        <button class="sec-act del" onclick="delCustomSec(${i})">✕</button>
+      </div>
+    </div>`).join('');
+}
+function toggleBuiltinSec(id,vis){
+  if(vis)hiddenSecs=hiddenSecs.filter(h=>h!==id);else if(!hiddenSecs.includes(id))hiddenSecs.push(id);
+  ss('hiddenSecs',hiddenSecs);applySecVis();updateNavLinks();
+}
+function toggleCustomSec(i,vis){customSecs[i].hidden=!vis;ss('customSecs',customSecs);renderCustomSecs();updateNavLinks();}
+function applySecVis(){BUILTIN_SECS.forEach(s=>{const e=el(s.id);if(e)e.style.display=hiddenSecs.includes(s.id)?'none':'';})}
+function addCustomSec(){
+  const title=prompt(t('sm_new_name'),'');if(!title?.trim())return;
+  const icon=prompt(t('sm_new_icon'),'📝')||'📝';
+  const content=prompt(t('sm_new_content'),'');
+  customSecs.push({id:'cs_'+Date.now(),icon,title:title.trim(),content:content||'',hidden:false});
+  ss('customSecs',customSecs);renderCustomSecs();updateNavLinks();renderSecMgr();
+}
+function editCustomSec(i){
+  const s=customSecs[i];
+  const title=prompt(t('sm_new_name'),s.title);if(title===null)return;
+  const icon=prompt(t('sm_new_icon'),s.icon)||s.icon;
+  const content=prompt(t('sm_new_content'),s.content);if(content===null)return;
+  customSecs[i]={...s,title:title.trim()||s.title,icon,content};
+  ss('customSecs',customSecs);renderCustomSecs();renderSecMgr();
+}
+function delCustomSec(i){
+  if(!confirm(t('confirm_del')))return;
+  customSecs.splice(i,1);ss('customSecs',customSecs);renderCustomSecs();updateNavLinks();renderSecMgr();
+}
+function renderCustomSecs(){
+  const c=el('custom-sections');if(!c)return;
+  c.innerHTML=customSecs.map(s=>`<section class="custom-section${s.hidden?' hidden-sec':''}" id="${s.id}">
+    <p class="section-label reveal">✦ ${esc(s.icon)}</p>
+    <h2 class="section-title reveal d1"><em>${esc(s.title)}</em></h2>
+    <div class="divider reveal d2"></div>
+    <div class="custom-content reveal d2">${esc(s.content)}</div>
+  </section>`).join('');
+  c.querySelectorAll('.reveal').forEach(el=>{
+    new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.08}).observe(el);
+  });
+}
+function updateNavLinks(){
+  const navUl=el('nav-links');if(!navUl)return;
+  navUl.querySelectorAll('[data-key]').forEach(a=>{
+    const href=a.getAttribute('href')?.slice(1);
+    if(href)a.style.display=hiddenSecs.includes(href)?'none':'';
+  });
+  navUl.querySelectorAll('.custom-nav-link').forEach(li=>li.remove());
+  customSecs.filter(s=>!s.hidden).forEach(s=>{
+    const li=document.createElement('li');li.className='custom-nav-link';
+    li.innerHTML=`<a href="#${s.id}" style="color:var(--muted);text-decoration:none;font-size:11px;letter-spacing:.07em;text-transform:uppercase;transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">${esc(s.icon)} ${esc(s.title)}</a>`;
+    navUl.appendChild(li);
+  });
+}
+
+// ── CONTACT FORM ──────────────────────────────────────────────────────
+function sendForm(){
+  if(!el('cf-em')?.value.trim()||!el('cf-ms')?.value.trim()){alert(t('alert_fill'));return;}
+  if(el('contact-form'))el('contact-form').style.display='none';
+  el('form-ok')?.classList.add('show');
+}
+
+// ── CHAT WIDGET ───────────────────────────────────────────────────────
+function toggleChat(){
+  const b=el('chat-bubble');b.classList.toggle('show');
+  if(b.classList.contains('show'))el('chat-badge')?.style.setProperty('display','none');
+}
+function closeChatBubble(){el('chat-bubble')?.classList.remove('show');}
+function sendChatMsg(){
+  const name=el('chat-name')?.value.trim();
+  const msg=el('chat-msg-field')?.value.trim();
+  if(!msg){return;}
+  if(el('chat-form-wrap'))el('chat-form-wrap').style.display='none';
+  el('chat-sent')?.classList.add('show');
+}
+
+// ── COOKIE ────────────────────────────────────────────────────────────
+function initCookie(){if(!lsS('cookie_seen'))setTimeout(()=>el('cookie-banner')?.classList.add('show'),2000);}
+function dismissCookie(ok){ssS('cookie_seen','1');el('cookie-banner')?.classList.remove('show');}
+
+// ── QR CODE ───────────────────────────────────────────────────────────
+function openQR(){
+  const url=window.location.href;
+  if(el('qr-url'))el('qr-url').textContent=url;
+  const container=el('qr-code');if(!container)return;
+  container.innerHTML='';
+  try{new QRCode(container,{text:url,width:200,height:200,colorDark:'#000000',colorLight:'#ffffff'});}catch(e){}
+  el('qr-overlay')?.classList.add('open');
+}
+function closeQR(){el('qr-overlay')?.classList.remove('open');}
+function downloadQR(){
+  const canvas=document.querySelector('#qr-code canvas');
+  if(canvas){const a=document.createElement('a');a.download='portfolio-qr.png';a.href=canvas.toDataURL();a.click();}
+}
+function printCV(){window.print();}
+
+// ── JSON EXPORT / IMPORT ──────────────────────────────────────────────
+function exportJSON(){
+  const payload={projekte:data.projekte,dienste:data.dienste,testi:data.testi,skills,stats,socials,tlExp,tlEdu,customSecs,hiddenSecs,
+    fields:Object.fromEntries(INLINE_FIELDS.map(f=>[f,el('f-'+f)?.textContent||lsS('if_'+f)])),
+    color:activeColor,font:activeFont,herobg:activeHeroBg,lang,exportDate:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=`portfolio-backup-${new Date().toISOString().slice(0,10)}.json`;a.click();
+}
+function importJSON(e){
+  const file=e.target.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    try{
+      const d=JSON.parse(ev.target.result);
+      if(d.projekte){data.projekte=d.projekte;ss('p',d.projekte);}
+      if(d.dienste){data.dienste=d.dienste;ss('d',d.dienste);}
+      if(d.testi){data.testi=d.testi;ss('ti',d.testi);}
+      if(d.skills){skills=d.skills;ss('skills',d.skills);}
+      if(d.stats){stats=d.stats;ss('stats',d.stats);}
+      if(d.socials){socials=d.socials;ss('socials',d.socials);}
+      if(d.tlExp){tlExp=d.tlExp;ss('tlExp',d.tlExp);}
+      if(d.tlEdu){tlEdu=d.tlEdu;ss('tlEdu',d.tlEdu);}
+      if(d.customSecs){customSecs=d.customSecs;ss('customSecs',d.customSecs);}
+      if(d.hiddenSecs){hiddenSecs=d.hiddenSecs;ss('hiddenSecs',d.hiddenSecs);}
+      if(d.fields)Object.entries(d.fields).forEach(([k,v])=>{ssS('if_'+k,v);const e=el('f-'+k);if(e)e.textContent=v;});
+      if(typeof d.color==='number')applyColor(d.color);
+      if(d.font)applyFont(d.font);
+      if(d.herobg)applyHeroBg(d.herobg);
+      if(d.lang)setLang(d.lang);
+      renderAll();applySecVis();renderCustomSecs();updateNavLinks();
+      alert('✅ Import erfolgreich!');
+    }catch(err){alert('❌ Fehler: '+err.message);}
+  };
+  r.readAsText(file);
+  e.target.value='';
+}
+function resetAll(){
+  if(!confirm('⚠️ Alle Daten löschen?'))return;
+  Object.keys(localStorage).filter(k=>k.startsWith(K)).forEach(k=>localStorage.removeItem(k));
+  location.reload();
+}
+
+// ── STATIC EXPORT FOR GITHUB ──────────────────────────────────────────
+async function startExport(){
+  const prog=el('export-prog');const bar=el('exp-bar');
+  const expTitle=el('exp-title');const expSub=el('exp-sub');
+  if(!prog)return;
+  const steps=[
+    [t('exp_prog'),t('exp_step1'),5],
+    [t('exp_prog'),t('exp_step2'),30],
+    [t('exp_prog'),t('exp_step3'),60],
+    [t('exp_prog'),t('exp_step4'),85],
+    [t('exp_done'),'',100]
+  ];
+  prog.classList.add('open');
+  for(const [title,sub,pct] of steps){
+    if(expTitle)expTitle.textContent=title;
+    if(expSub)expSub.textContent=sub;
+    if(bar)bar.style.width=pct+'%';
+    await new Promise(r=>setTimeout(r,420));
+  }
+  await new Promise(r=>setTimeout(r,300));
+  prog.classList.remove('open');
+  generateStaticHTML();
+}
+
+function generateStaticHTML(){
+  // Collect snapshot
+  const snap={
+    projekte:data.projekte,dienste:data.dienste,testi:data.testi,
+    skills,stats,socials,tlExp,tlEdu,customSecs,hiddenSecs,
+    color:activeColor,font:activeFont,herobg:activeHeroBg,lang,
+    avatar:lsS('avatar'),
+    fields:Object.fromEntries(INLINE_FIELDS.map(f=>[f,el('f-'+f)?.textContent||lsS('if_'+f)]))
+  };
+
+  let html=document.documentElement.outerHTML;
+
+  // Static data injector — overrides localStorage reads on first load
+  const staticScript=`<script id="pf-static">
+window.__S=${JSON.stringify(snap)};
+(function(){
+  const KP='${K}',SD=window.__S;
+  const KM={p:'projekte',d:'dienste',ti:'testi',skills:'skills',stats:'stats',socials:'socials',
+    tlExp:'tlExp',tlEdu:'tlEdu',customSecs:'customSecs',hiddenSecs:'hiddenSecs',color:'color'};
+  let done=false;
+  const _g=Storage.prototype.getItem;
+  Storage.prototype.getItem=function(key){
+    if(!done&&typeof key==='string'&&key.startsWith(KP)){
+      const k=key.slice(KP.length);
+      if(k==='lang')return SD.lang||null;
+      if(k==='font')return SD.font||null;
+      if(k==='herobg')return SD.herobg||null;
+      if(k==='avatar')return SD.avatar||null;
+      if(k==='color')return JSON.stringify(SD.color);
+      if(k.startsWith('if_'))return SD.fields?.[k.slice(3)]||null;
+      if(KM[k])return JSON.stringify(SD[KM[k]]);
+    }
+    return _g.call(this,key);
+  };
+  setTimeout(()=>{done=true;},3000);
+})();
+<\/script>`;
+
+  // Admin keyboard shortcut — Ctrl+Shift+E to show edit UI
+  const adminScript=`<script id="pf-admin">
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&e.shiftKey&&e.key==='E'){
+    const et=document.getElementById('edit-toggle');
+    const sm=document.getElementById('sec-mgr-btn');
+    const exp=document.querySelector('.btn-export');
+    if(et)et.style.removeProperty('display');
+    if(sm)sm.style.removeProperty('display');
+    if(exp)exp.style.removeProperty('display');
+    if(et)et.click();
+  }
+});
+<\/script>`;
+
+  // Hide edit controls in public version
+  html=html
+    .replace(/(<button[^>]+id="edit-toggle"[^>]*>)/g,'<button id="edit-toggle" style="display:none">')
+    .replace(/(<button[^>]+class="btn-export"[^>]*>)/g,'<button class="btn-export" style="display:none">');
+
+  // Inject before </head>
+  html=html.replace('</head>',staticScript+adminScript+'</head>');
+
+  const blob=new Blob(['<!DOCTYPE html>\n'+html],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='index.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(()=>alert(t('exp_success')),700);
+}
+
+// ── MOBILE MENU ───────────────────────────────────────────────────────
+function toggleMobile(){el('mobile-menu')?.classList.toggle('open');}
+function closeMobile(){el('mobile-menu')?.classList.remove('open');}
+
+// ── SCROLL REVEAL ─────────────────────────────────────────────────────
+function setupReveal(){
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(e=>obs.observe(e));
+}
+
+// ── SCROLL EVENTS ─────────────────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  const bt=el('back-top');
+  if(bt)bt.classList.toggle('show',scrollY>400);
+},{passive:true});
+
+// ── CLOSE ON OUTSIDE CLICK ────────────────────────────────────────────
+document.addEventListener('click',e=>{
+  const panels=el('pf-panels');
+  if(panels?.classList.contains('open')&&!panels.contains(e.target)&&!e.target.closest('[onclick="togglePanels()"]'))
+    panels.classList.remove('open');
+});
+
+// ── CLOSE ON ESCAPE ───────────────────────────────────────────────────
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    closeModal();closeLightbox();closeQR();closePwModal();
+    el('sec-mgr')?.classList.remove('open');el('sec-backdrop')?.classList.remove('open');
+    el('pf-panels')?.classList.remove('open');
+  }
+  if(e.key==='Enter'&&el('pw-overlay')?.classList.contains('open'))submitPw();
+});
+
+// Close overlays on backdrop click
+['modal','lightbox','qr-overlay','pw-overlay'].forEach(id=>{
+  const e=el(id);
+  if(e)e.addEventListener('click',ev=>{if(ev.target===e){
+    if(id==='modal')closeModal();
+    else if(id==='lightbox')closeLightbox();
+    else if(id==='qr-overlay')closeQR();
+    else if(id==='pw-overlay')closePwModal();
+  }});
+});
+
+// ── RENDER ALL ────────────────────────────────────────────────────────
+function renderAll(){
+  renderSkills();renderProjekte();renderDienste();renderTesti();
+  renderSocials();renderTl('exp');renderTl('edu');
+  renderCustomSecs();updateNavLinks();
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────
+function init(){
+  // Apply saved settings
+  applyColor(activeColor,false);
+  applyFont(activeFont,false);
+  applyHeroBg(activeHeroBg,false);
+  applyBgTheme(activeBgTheme,false);
+  // Build design panels
+  buildColorSwatches();buildFontSwatches();buildBgSwatches();buildBgThemePills();
+  // Project layout
+  buildLayoutBtns();
+  // Restore inline content
+  restoreInlineFields();restoreAvatar();
+  // Set language (also applies all text)
+  setLang(lang);
+  // Render data
+  applySecVis();
+  // Splash name
+  const name=lsS('if_vorname')||'Portfolio';
+  setTxt('splash-name',name);
+  // Splash hide
+  setTimeout(()=>el('splash')?.classList.add('hide'),2200);
+  // Setup
+  setupCounters();setupReveal();initCookie();
+}
+
+// Wait for DOM
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',init);
+}else{
+  init();
+}
+</script>
+</body>
 </html>
